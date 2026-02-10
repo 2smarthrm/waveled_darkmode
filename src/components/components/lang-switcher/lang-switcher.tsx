@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
- 
+
   useEffect(() => {
     const saved = cookies.googtrans?.split("/")[2];
     if (saved) setCurrent(saved); 
@@ -61,7 +61,7 @@ export default function LanguageSwitcher() {
   const activeLang = LANGUAGES.find((l) => l.code === current);
 
   return (
-    <div className="dropdown-language-area" ref={wrapperRef} style={{ position: "relative" }}>
+    <div ref={wrapperRef} style={{ position: "relative" }}>
       <div id="google_translate_element" style={{ display: "none" }} />
 
       <button onClick={() => setOpen((v) => !v)} className="dropdown-lang">
@@ -71,12 +71,13 @@ export default function LanguageSwitcher() {
 
       {open && (
         <div
+        className="drop-downlanguage"
           style={{ position: "absolute",  top: "120%", right: 0, background: "#fff", border: "1px solid #e5e7eb",borderRadius: "10px", 
           padding: "6px", boxShadow: "0 10px 30px rgba(0,0,0,.1)", zIndex: 99, minWidth: "120px",}}>
           {LANGUAGES.map((lang) => (
             <button
-              key={lang.code}
               className={current === lang.code ? "active-lang" : ""}
+              key={lang.code}
               onClick={() => changeLanguage(lang.code)}
               style={{width: "100%", padding: "4px 10px", borderRadius: "6px", background: current === lang.code ? "#f1f5f9" : "transparent", 
               border: "none", textAlign: "left", cursor: "pointer", fontSize: "14px"}}>
@@ -89,10 +90,3 @@ export default function LanguageSwitcher() {
     </div>
   ); 
 }
-
-
-
-
-
-
- 
