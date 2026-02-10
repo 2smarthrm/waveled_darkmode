@@ -155,6 +155,9 @@ const HeaderFourInner = () => {
       rafRef.current = requestAnimationFrame(update);
     };
 
+
+ 
+
     window.addEventListener("scroll", onScrollOrResize, { passive: true });
     window.addEventListener("resize", onScrollOrResize);
 
@@ -351,8 +354,9 @@ const HeaderFourInner = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [activeMenu]);
 
-  const [WindowSize, SetWindowSize] = useState(window.innerWidth);
+  const [WindowSize, SetWindowSize] = useState(0);
   useEffect(() => { 
+    SetWindowSize(window.innerWidth);
     window.addEventListener("resize",(e)=>{   
        SetWindowSize(e.target.innerWidth); 
     }); 
@@ -366,10 +370,16 @@ const HeaderFourInner = () => {
   const logoAlt = headerIsWhite ? "Waveled (logo preto)" : "Waveled (logo branco)";
 
 
+
+
+
+
+
+
    useEffect(() => {
     checkDarkMode(); 
    }, []);
-
+ 
 
    function checkDarkMode() {
      const isDark = localStorage.getItem("theme-status");
@@ -380,6 +390,8 @@ const HeaderFourInner = () => {
      } 
      setIsSiteDark(status);
    }
+
+ 
 
   function ToggleTheme(){
         const isDark = localStorage.getItem("theme-status");
@@ -392,9 +404,56 @@ const HeaderFourInner = () => {
         localStorage.removeItem("theme-status")
         document.querySelector("body").classList.remove("dark-wave");
         setIsSiteDark(false);
-     }
-      
+     } 
   }
+
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    checkDarkMode(); 
+  }, []);
+
+  function checkDarkMode() {
+    let status = true; 
+    if (!localStorage.getItem("theme-status")) {
+      localStorage.setItem("theme-status", "true");
+      document.body.classList.add("dark-wave");
+      status = true;
+    } else if (localStorage.getItem("theme-status") === "true") {
+      document.body.classList.add("dark-wave");
+      status = true;
+    } else {
+      document.body.classList.remove("dark-wave");
+      status = false;
+    }
+    setIsSiteDark(status);
+  }
+
+  function ToggleTheme() {
+    const isDark = localStorage.getItem("theme-status");
+    let status = isDark === "true";
+    if (!status) {
+      localStorage.setItem("theme-status", "true");
+      document.body.classList.add("dark-wave");
+      setIsSiteDark(true);
+    } else {
+      localStorage.setItem("theme-status", "false");
+      document.body.classList.remove("dark-wave");
+      setIsSiteDark(false);
+    }
+  }
+
+
+
+
+
 
 
   return (
@@ -589,7 +648,14 @@ const HeaderFourInner = () => {
               <Link href="%" onClick={() => setSideBar(false)}>
                 <h5 style={{ fontSize: "20px" }} className="text-dark">
                   <img
+                    className="dark-logo"
                     src={LOGO_DARK}
+                    style={{ maxHeight: "60px", marginBottom: "10px" }}
+                    alt=""
+                  />
+                    <img
+                    className="light-logo"
+                    src={LOGO_LIGHT}
                     style={{ maxHeight: "60px", marginBottom: "10px" }}
                     alt=""
                   />

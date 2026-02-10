@@ -422,7 +422,7 @@ export default function SolutionMegaMenu() {
           setOpen(true);
         }}
         onMouseLeave={scheduleClose}
-      >
+      > 
         <div
           className="wl-mega-inner"
           style={{ maxHeight: "min(600px, calc(100vh - 120px))" }}
