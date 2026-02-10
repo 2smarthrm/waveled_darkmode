@@ -6,7 +6,7 @@ import { FaGlobeEurope } from "react-icons/fa";
 
 const LANGUAGES = [
   { code: "pt", label: "Português", flag: "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png"},
-  { code: "en", label: "Englês", flag: "https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png"},
+  { code: "en", label: "Inglês", flag: "https://www.countryflags.com/wp-content/uploads/united-states-of-america-flag-png-large.png"},
   { code: "es", label: "Espanhol", flag: "https://www.countryflags.com/wp-content/uploads/spain-flag-png-large.png"},
   { code: "fr", label: "Francês", flag: "https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png"},
 ];
@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-
+ 
   useEffect(() => {
     const saved = cookies.googtrans?.split("/")[2];
     if (saved) setCurrent(saved); 
@@ -61,7 +61,7 @@ export default function LanguageSwitcher() {
   const activeLang = LANGUAGES.find((l) => l.code === current);
 
   return (
-    <div ref={wrapperRef} style={{ position: "relative" }}>
+    <div className="dropdown-language-area" ref={wrapperRef} style={{ position: "relative" }}>
       <div id="google_translate_element" style={{ display: "none" }} />
 
       <button onClick={() => setOpen((v) => !v)} className="dropdown-lang">
@@ -76,6 +76,7 @@ export default function LanguageSwitcher() {
           {LANGUAGES.map((lang) => (
             <button
               key={lang.code}
+              className={current === lang.code ? "active-lang" : ""}
               onClick={() => changeLanguage(lang.code)}
               style={{width: "100%", padding: "4px 10px", borderRadius: "6px", background: current === lang.code ? "#f1f5f9" : "transparent", 
               border: "none", textAlign: "left", cursor: "pointer", fontSize: "14px"}}>
@@ -88,3 +89,10 @@ export default function LanguageSwitcher() {
     </div>
   ); 
 }
+
+
+
+
+
+
+ 
