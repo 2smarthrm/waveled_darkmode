@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
@@ -7,11 +6,19 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const MIN_CARD_WIDTH = 400;
-const CARD_GAP = 20;
+const CARD_GAP = 24; // aumentei gap para melhor separação
 
 function getCarouselConfig(containerWidth) {
   if (!containerWidth || containerWidth <= 0) {
     return { items: 1, partialVisible: false, gutter: 0 };
+  }
+
+  // Para telas menores, ajusta para 1 item e gap menor
+  if (containerWidth < 540) {
+    return { items: 1, partialVisible: false, gutter: 0 };
+  }
+  if (containerWidth < 800) {
+    return { items: 1, partialVisible: true, gutter: 12 };
   }
 
   const theoretical = (containerWidth + CARD_GAP) / (MIN_CARD_WIDTH + CARD_GAP);
@@ -22,7 +29,7 @@ function getCarouselConfig(containerWidth) {
 
   let partialVisible = false;
   let gutter = 0;
- 
+
   if (items >= 2 && leftover > 0) {
     const fraction = leftover / MIN_CARD_WIDTH;
     if (fraction >= 0.15) {
@@ -49,10 +56,6 @@ const TestimonialSection = () => {
     gutter: 0,
   });
 
-  // Força o Carousel a recalcular quando:
-  // - config muda (items/gutter/partial)
-  // - dados chegam
-  // Isto resolve o problema de cards sobrepostos até fazer resize.
   const [carouselKey, setCarouselKey] = useState("init");
 
   const isBrowser = typeof window !== "undefined";
@@ -74,7 +77,6 @@ const TestimonialSection = () => {
       const data = response?.data?.data ? response.data.data : [];
       setLoadingData(data);
     } catch (error) {
-      // ignore abort
       if (error?.name === "CanceledError" || error?.name === "AbortError") return;
     }
   }
@@ -83,11 +85,8 @@ const TestimonialSection = () => {
     const controller = new AbortController();
     loadData(controller.signal);
     return () => controller.abort();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Atualiza config baseado no tamanho real do container.
-  // Usa ResizeObserver para apanhar mudanças automáticas de layout (fonts, imagens, css, etc)
   useIsomorphicLayoutEffect(() => {
     if (!isBrowser) return;
 
@@ -110,7 +109,6 @@ const TestimonialSection = () => {
       });
     };
 
-    // Faz 2 frames para garantir layout estável (evita "só corrige ao resize")
     const updateStable = () => {
       cancelAnimationFrame(raf1);
       cancelAnimationFrame(raf2);
@@ -139,15 +137,12 @@ const TestimonialSection = () => {
     };
   }, [isBrowser]);
 
-  // Sempre que a config OU os dados mudam, forçamos remount do Carousel
-  // para ele recalcular widths/transform corretamente.
   useEffect(() => {
     const k = `${carouselConfig.items}-${Math.round(
       carouselConfig.gutter
     )}-${carouselConfig.partialVisible ? 1 : 0}-${loadingData.length}`;
     setCarouselKey(k);
 
-    // também ajuda em alguns casos do react-multi-carousel
     if (typeof window !== "undefined") {
       requestAnimationFrame(() => {
         window.dispatchEvent(new Event("resize"));
@@ -166,7 +161,6 @@ const TestimonialSection = () => {
     [carouselConfig.items, carouselConfig.gutter]
   );
 
-  // EFEITO DE BLUR NO SCROLL
   useEffect(() => {
     const handleScroll = () => {
       const section = document.querySelector(".blur-slide-screen");
@@ -193,10 +187,10 @@ const TestimonialSection = () => {
 
   return (
     <>
-    <div className="section bg-dark d-none image-rack">
-         <img src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20(79).png" alt="" />
-    </div>
-      <div   className="section dark-bg blur-slide-screen"   style={{ position: "relative" }}  >
+      <div className="section bg-dark d-none image-rack">
+        <img src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20(79).png" alt="" />
+      </div>
+      <div className="section dark-bg blur-slide-screen" style={{ position: "relative" }}>
         <div className="image-wall">
           <img
             src="https://ik.imagekit.io/fsobpyaa5i/happy-diverse-friends-celebrating-with-sparklers-o-2025-02-13-00-11-44-utc.jpg"
@@ -249,13 +243,15 @@ const TestimonialSection = () => {
                     <article key={product?._id || index} className="slider-card">
                       <div className="image-area">
                         {imageUrl && (
-                          <Link href={`single-shop?product=${product?._id || ""}`}><img src={imageUrl} alt={truncatedName || "Produto"} /> </Link>
+                          <Link href={`single-shop?product=${product?._id || ""}`}>
+                            <img src={imageUrl} alt={truncatedName || "Produto"} />
+                          </Link>
                         )}
                       </div>
                       <div className="text">
                         <Link href={`single-shop?product=${product?._id || ""}`}>
                           <h4>{truncatedName}</h4>
-                        </Link> 
+                        </Link>
                         <p>{truncatedSpecs}</p>
                       </div>
                     </article>
@@ -272,35 +268,29 @@ const TestimonialSection = () => {
           width: 100%;
         }
 
-        /* Garante que o wrapper do carousel consegue calcular altura/largura sem glitches */
         .react-multi-carousel-list {
           width: 100%;
         }
 
-        /* gap total 20px entre cards */
         .slider-item-custom {
-          padding: 0 10px;
+          padding: 0 12px;
           box-sizing: border-box;
         }
 
-        /* Importante:
-           Não usar min-width aqui (causa overflow visual e pode parecer "sobreposto")
-           porque o react-multi-carousel controla a largura do item wrapper.
-           O cálculo de items já assegura ~400px mínimo pela nossa config.
-        */
         .slider-card {
           border-radius: 14px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           width: 100%;
-          height: 100%;
+          height: 100%; 
+          margin-bottom: 8px;
         }
 
         .slider-card .image-area {
           width: 100%;
           aspect-ratio: 16 / 9;
-          overflow: hidden;
+          overflow: hidden; 
         }
 
         .slider-card .image-area img {
@@ -332,6 +322,50 @@ const TestimonialSection = () => {
 
         .custom-dot-list-style li button {
           border-radius: 999px;
+        }
+
+        /* Melhor responsividade */
+        @media (max-width: 1200px) {
+          .slider-item-custom {
+            padding: 0 8px;
+          }
+          .slider-card .text {
+            padding: 10px 10px 12px;
+          }
+        }
+        @media (max-width: 900px) {
+          .slider-item-custom {
+            padding: 0 6px;
+          }
+          .slider-card {
+            border-radius: 10px;
+          }
+        }
+        @media (max-width: 700px) {
+          .slider-item-custom {
+            padding: 0 3px;
+          }
+          .slider-card {
+            border-radius: 8px;
+          }
+          .slider-card .text h4 {
+            font-size: 14px;
+          }
+          .slider-card .text p {
+            font-size: 12px;
+          }
+        }
+        @media (max-width: 540px) {
+          .slider-item-custom {
+            padding: 0 1px;
+          }
+          .slider-card {
+            border-radius: 6px;
+            margin-bottom: 4px;
+          }
+          .slider-card .text {
+            padding: 8px 6px 8px;
+          }
         }
       `}</style>
     </>
