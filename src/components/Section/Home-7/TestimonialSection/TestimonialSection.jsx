@@ -304,7 +304,7 @@ const TestimonialSection = () => {
             font-size: 12px;
           }
         }
-        @media (max-width: 540px) {
+        @media (max-width: 540px) { 
           .slider-card {
             border-radius: 6px;
           }
