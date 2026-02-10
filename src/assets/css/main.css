@@ -3138,7 +3138,7 @@ body .card-slides-vertical .card-slider-vertical .card-inner .over-image button 
 
 body .card-slides-vertical .card-slider-vertical .card-inner .over-image small {
   color: #bcbcbc !important;
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 
@@ -4521,6 +4521,7 @@ body.dark-wave .request-modal  .modal-title,
 body.dark-wave .tekup-sidemenu-column p a, 
 body.dark-wave .wl-mega-inner .wl-header-row .wl-heading,
 body.dark-wave .wl-solution-menu .wl-mega-inner .tile-label,
+body.dark-wave .tekup-default-content a,
 body.dark-wave  .wl-filter-card label{
   color:#dcdfe4 !important;
 }
@@ -4658,12 +4659,6 @@ body .slider-container-area{
  
  
 
-body .section-testimonial{
-
-}
-
-
- 
 
 body .blur-slide-screen .image-wall ,
 body .blur-slide-screen .image-wall img {
@@ -4673,4 +4668,20 @@ body .blur-slide-screen .image-wall img {
   position: relative;
   transition: all 1s ease-in-out;
   overflow: hidden;
+}
+
+body .tekup-main-form button,
+body .tekup-main-form label, 
+body .tekup-main-form input,
+body .tekup-main-form p,
+body.dark-wave .tekup-default-content a,
+body .tekup-main-form textarea,
+body .tekup-main-form{
+  font-size:16px !important;
+}
+
+
+body .tekup-main-form #consent{
+  width:30px !important;
+  height:30px !important;
 }
