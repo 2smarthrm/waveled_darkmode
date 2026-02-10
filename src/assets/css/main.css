@@ -4511,6 +4511,7 @@ body.dark-wave  .wl-filter-card select{
 body  .tekup-product-info p,
 body  .tekup-product-info span,
 body  .tekup-product-info a,
+body  .tekup-sidemenu-column p a, 
 body  .wl-filter-card select{
  font-size:16px !important;
 }
@@ -4518,6 +4519,7 @@ body  .wl-filter-card select{
 body.dark-wave .wl-solution-menu h5,
 body.dark-wave .request-modal .modal-content,
 body.dark-wave .request-modal  .modal-title,
+body.dark-wave .tekup-sidemenu-column p a, 
 body.dark-wave .wl-mega-inner .wl-header-row .wl-heading,
 body.dark-wave .wl-solution-menu .wl-mega-inner .tile-label,
 body.dark-wave  .wl-filter-card label{
@@ -4539,6 +4541,7 @@ body.dark-wave .wl-header-row{
 
 body.dark-wave .wl-solution-menu .wl-mega-inner,
 body.dark-wave .wl-mega-inner .wl-right,
+body.dark-wave .tekup-sidemenu-column ,
 body.dark-wave .request-modal .modal-content,
 body.dark-wave .tekup-footer-section .wl-newsletter-input,
 body.dark-wave .section.bg-grey{
@@ -4621,4 +4624,29 @@ body.dark-wave .tekup-footer-textarea .light-logo{
  
 body .wl-mega-inner .sm-text{
    font-size:14px !important;
+}
+
+ 
+
+
+
+
+
+ 
+
+.tekup-sidemenu-logo .dark-logo{
+  display: block;
+}
+
+body.dark-wave .tekup-sidemenu-column .tekup-sidemenu-logo .dark-logo{
+   display: none !important;
+}
+
+ 
+.tekup-sidemenu-logo  .light-logo{
+  display: none;
+}
+
+body.dark-wave .tekup-sidemenu-column .tekup-sidemenu-logo .light-logo{
+   display: block !important;
 }
