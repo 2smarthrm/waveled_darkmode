@@ -1256,8 +1256,7 @@ body .featured-product.box-1 .text-box h1 {
 body .featured-product.box-1 p {
   color: silver;
 }
-
-body .blur-slide-screen .image-wall img,
+ 
 body .blur-slide-screen {
   height: 850px;
   width: 100%;
@@ -4439,7 +4438,7 @@ body.dark-wave .tekup-footer-section span{
     color:#cfcfcf !important;
 }
 
-body.dark-wave .card-slides-vertical .slick-dots li button {
+body.dark-wave .categorie-page  .card-slides-vertical .slick-dots li button {
   background: transparent !important;
 }
 
@@ -4626,13 +4625,6 @@ body .wl-mega-inner .sm-text{
    font-size:14px !important;
 }
 
- 
-
-
-
-
-
- 
 
 .tekup-sidemenu-logo .dark-logo{
   display: block;
@@ -4655,3 +4647,30 @@ body.dark-wave .accordion-button.collapsed{
    background:transparent !important;
    color:#ffff;
 } 
+
+
+body .slider-container-area{
+  position: absolute;
+  right:0px;
+  width:100%;
+  bottom:30px;
+}
+ 
+ 
+
+body .section-testimonial{
+
+}
+
+
+ 
+
+body .blur-slide-screen .image-wall ,
+body .blur-slide-screen .image-wall img {
+  height:100%;
+  width: 100%;
+  object-fit: cover;
+  position: relative;
+  transition: all 1s ease-in-out;
+  overflow: hidden;
+}
