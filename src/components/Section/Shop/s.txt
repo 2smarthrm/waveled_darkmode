@@ -1,5 +1,4 @@
-/// implemntar aqui o code da pagina por categoria pegar o id da acria no url ex: /shop?category=893873837uthdy76e376,  usar aqui no meu code no vertical slider é para suar top soluções verticais , nos primeiros tabs e para lsiatar as outraas categroias, resolver isosoe. dveolver fullcode
-
+ 
 "use client";
 import Link from "next/link";
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -139,6 +138,28 @@ function HeaderCategorieAndTitle({ title, categories, active }) {
     </aside>
   );
 }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function CardSliderVertical({ item }) {
   return (
@@ -442,6 +463,8 @@ function VideoSolutionsSlick() {
           font-size: 18px;
           backdrop-filter: blur(6px);
         }
+
+        
         .vs-close:hover {
           background: rgba(255, 255, 255, 0.22);
         }

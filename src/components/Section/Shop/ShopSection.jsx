@@ -111,7 +111,6 @@ function HeaderAreaAndTitle({ title, areas, active }) {
       <div className="category-page-title">
         <h3>Soluções que transformam espaços.</h3>
         <h6 className="text-secondary">soluções para - {title}</h6>
-        <br />
       </div>
       <hr />
       <div className="category-page-cats">
