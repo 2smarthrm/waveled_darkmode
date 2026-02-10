@@ -4650,3 +4650,8 @@ body.dark-wave .tekup-sidemenu-column .tekup-sidemenu-logo .dark-logo{
 body.dark-wave .tekup-sidemenu-column .tekup-sidemenu-logo .light-logo{
    display: block !important;
 }
+
+body.dark-wave .accordion-button.collapsed{
+   background:transparent !important;
+   color:#ffff;
+} 
