@@ -4522,6 +4522,11 @@ body.dark-wave .tekup-sidemenu-column p a,
 body.dark-wave .wl-mega-inner .wl-header-row .wl-heading,
 body.dark-wave .wl-solution-menu .wl-mega-inner .tile-label,
 body.dark-wave .tekup-default-content a,
+body.dark-wave .drop-downlanguage,
+body.dark-wave .drop-downlanguage span,
+body.dark-wave .drop-downlanguage p,
+body.dark-wave .drop-downlanguage button, 
+body.dark-wave .drop-downlanguage a,
 body.dark-wave  .wl-filter-card label{
   color:#dcdfe4 !important;
 }
@@ -4543,6 +4548,7 @@ body.dark-wave .wl-solution-menu .wl-mega-inner,
 body.dark-wave .wl-mega-inner .wl-right,
 body.dark-wave .tekup-sidemenu-column ,
 body.dark-wave .request-modal .modal-content,
+body.dark-wave .drop-downlanguage,
 body.dark-wave .tekup-footer-section .wl-newsletter-input,
 body.dark-wave .section.bg-grey{
   background-color:#1c1f24 !important;
@@ -4673,6 +4679,7 @@ body .blur-slide-screen .image-wall img {
 body .tekup-main-form button,
 body .tekup-main-form label, 
 body .tekup-main-form input,
+body .tekup-related-product-section small,
 body .tekup-main-form p,
 body.dark-wave .tekup-default-content a,
 body .tekup-main-form textarea,
@@ -4685,3 +4692,18 @@ body .tekup-main-form #consent{
   width:30px !important;
   height:30px !important;
 }
+
+
+body .dropdown-lang{
+   min-width:200px;
+}
+
+
+ body.dark-wave .drop-downlanguage{
+   border:1px solid #111 !important;
+ }
+
+ body.dark-wave .lang-block .active-lang{
+   color:#cccccc !important;
+   background-color:#111 !important;
+ }
