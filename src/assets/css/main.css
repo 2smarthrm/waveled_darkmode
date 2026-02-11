@@ -4712,7 +4712,7 @@ body .dropdown-lang{
 
  body .un-video-container {
    width:100%;
-   height:700px;
+   height:550px;
    background:#000;
    border-radius:10px;
  }
@@ -4732,10 +4732,19 @@ body .dropdown-lang{
 body .tekup-footer-top ul li ,
 body .tekup-footer-menu ul li a ,
 body .tekup-footer-top a,
+body .tekup-footer-top  p,
+body .tekup-footer-top  div,
+body .tekup-copywright p,
+body .tekup-copywright,
+body .tekup-copywright span,
 body .tekup-footer-menu ul span,
 body .tekup-footer-top span {
-  font-size:16px !important;
+  font-size:14px !important;
 } 
+
+body .tekup-footer-top ul li{
+  margin:2px 0px !important;
+}
 
 
 body .categorie-page-products strong{
@@ -4755,7 +4764,18 @@ body .site-header .tekup-header-bottom .product-menu {
   min-height:50px !important;
 }
 
-    .site-menu-main .nav-link-item{
-         padding-top:20px !important;
-         padding-bottom:20px !important;
-    }
+.site-menu-main .nav-link-item{
+    padding-top:20px !important;
+    padding-bottom:20px !important;
+} 
+
+
+body .main-selected-image{
+  max-height:400px;
+  object-fit: contain !important;
+  background-color:#fff;
+}
+
+body .single-portofolio-area article img{ 
+  max-height:440px !important;
+}
