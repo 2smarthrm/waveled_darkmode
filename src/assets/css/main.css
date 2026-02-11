@@ -4707,3 +4707,45 @@ body .dropdown-lang{
    color:#cccccc !important;
    background-color:#111 !important;
  }
+
+
+ body .un-video-container {
+   width:100%;
+   height:700px;
+   background:#000;
+   border-radius:10px;
+ }
+
+
+ body .un-video-container video{
+  width:100%;
+  height:100%;
+  border-radius:10px;
+ }
+
+
+ body .product-details-slider-solution strong{
+   font-size:18px !important;
+ }
+
+body .tekup-footer-top ul li ,
+body .tekup-footer-menu ul li a ,
+body .tekup-footer-top a,
+body .tekup-footer-menu ul span,
+body .tekup-footer-top span {
+  font-size:16px !important;
+} 
+
+
+body .categorie-page-products strong{
+  font-size:16px !important;
+}
+
+body .slider-card h4,
+body .slider-card h5{
+  letter-spacing: unset !important;
+}
+
+body .navbar.site-navbar{
+   padding:0px !important;
+}
