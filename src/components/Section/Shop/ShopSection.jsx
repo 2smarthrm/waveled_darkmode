@@ -21,7 +21,7 @@ function FiveSolutionsSlider({ items }) {
     initialSlide: 0,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true, dots: true } },
-      { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 1 } },
+      { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 1 }},
       { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
     ],
   };
@@ -111,6 +111,7 @@ function HeaderAreaAndTitle({ title, areas, active }) {
       <div className="category-page-title">
         <h3>Soluções que transformam espaços.</h3>
         <h6 className="text-secondary">soluções para - {title}</h6>
+        <br />
       </div>
       <hr />
       <div className="category-page-cats">
@@ -649,3 +650,22 @@ export default function ShopSection() {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
