@@ -4749,3 +4749,12 @@ body .slider-card h5{
 body .navbar.site-navbar{
    padding:0px !important;
 }
+
+body .site-header .tekup-header-bottom .product-menu {
+  min-height:50px !important;
+}
+
+    .site-menu-main .nav-link-item{
+         padding-top:20px !important;
+         padding-bottom:20px !important;
+    }
