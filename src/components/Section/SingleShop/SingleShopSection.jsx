@@ -903,6 +903,7 @@ export default function SingleShopSection() {
                   <div className="tekup-tabs-wrapper">
                     <div className="tabContent">
                       <img
+                      className="main-selected-image"
                         src={
                           (images[activeImage] || "").startsWith("http")
                             ? images[activeImage]
