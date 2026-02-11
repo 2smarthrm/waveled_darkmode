@@ -4460,6 +4460,7 @@ body .wl-prefooter-cta p{
 body .toggle-dark-theme{
   margin-left:15px;
   color:#ffff; 
+  cursor: pointer;
 }
  
 
