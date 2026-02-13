@@ -4682,10 +4682,14 @@ body .tekup-main-form label,
 body .tekup-main-form input,
 body .tekup-related-product-section small,
 body .tekup-main-form p,
-body.dark-wave .tekup-default-content a,
+.tekup-contact-info a,
+body .tekup-default-content a,
 body .tekup-main-form textarea,
+body .tekup-contact-info-wrap .tekup-contact-info a,
+body .tekup-contact-info-wrap .tekup-contact-info ,
+body .tekup-contact-info-wrap .tekup-contact-info p,
 body .tekup-main-form{
-  font-size:16px !important;
+  font-size:16px !important; 
 }
 
 
@@ -4779,3 +4783,5 @@ body .main-selected-image{
 body .single-portofolio-area article img{ 
   max-height:440px !important;
 }
+
+ 
