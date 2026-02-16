@@ -76,7 +76,7 @@ const ItSolutionSection = () => {
         </div>
           <br /><br />
       </div> 
-           <div className="bg-danger col-lg-12">
+           <div >
                <img className="image-home" src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-05T162518.496.png" alt="" />
            </div>
           <div className="container"> 

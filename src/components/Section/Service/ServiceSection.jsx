@@ -131,7 +131,7 @@ const Sections = [
     image:
       "https://images.pexels.com/photos/7682087/pexels-photo-7682087.jpeg",
 over_text: { 
-  text_1: "Assistência sempre disponível",
+  text_1: "Assistência sempre disponível  ",
   text_2: "Suporte remoto e no local"
 }
 
@@ -148,35 +148,35 @@ over_text: {
 
 
 
-        const [LoadingStatus,SetLoadingStatus] =  useState(null);
-        const [LoadingData, SetLoadingData] =  useState([]); 
-        const isBrowser = typeof window !== "undefined";
-        const protocol = isBrowser && window.location.protocol === "https:" ? "https" : "http";
-        const BaseUrl = protocol === "https"  ?  'https://waveledserver.vercel.app' : "http://localhost:4000";
-      
-         async function LoadData(){
-            try {
-              const response = await axios.get(BaseUrl+"/api/featured", {withCredentials: true });
-              const data = response?.data?.data ? response?.data?.data : [];
-              SetLoadingData(data); 
-    
-              console.clear();
-              console.log(response);
-    
-    
-    
-            } catch (error){
-               console.clear();
-               console.log(error);
-            } finally { 
-      
-            }
-            SetLoadingStatus(true);
-          }
-      
-          useEffect(() => {
-             LoadData();
-          }, []);
+const [LoadingStatus,SetLoadingStatus] =  useState(null);
+const [LoadingData, SetLoadingData] =  useState([]); 
+const isBrowser = typeof window !== "undefined";
+const protocol = isBrowser && window.location.protocol === "https:" ? "https" : "http";
+const BaseUrl = protocol === "https"  ?  'https://waveledserver.vercel.app' : "http://localhost:4000";
+
+  async function LoadData(){
+    try {
+      const response = await axios.get(BaseUrl+"/api/featured", {withCredentials: true });
+      const data = response?.data?.data ? response?.data?.data : [];
+      SetLoadingData(data); 
+
+      console.clear();
+      console.log(response);
+
+
+
+    } catch (error){
+        console.clear();
+        console.log(error);
+    } finally { 
+
+    }
+    SetLoadingStatus(true);
+  }
+
+  useEffect(() => {
+      LoadData();
+  }, []);
 
   return (
     <>
@@ -196,7 +196,6 @@ over_text: {
               </div>
             </div>
           </div>
-
           {item.video ? 
             <section className="video-area">
               <img 

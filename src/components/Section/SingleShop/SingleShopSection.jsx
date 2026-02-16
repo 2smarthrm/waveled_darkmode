@@ -148,7 +148,8 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
  
     return all.slice(0, PREVIEW_REAL_ITEMS);
   }, [all, showAllGrid, hasMoreThanThreshold]);
- 
+  
+
   const moreBgImage = useMemo(() => {
     if (!hasMoreThanThreshold) return "";
     const eighth = all[PREVIEW_REAL_ITEMS];  
@@ -983,7 +984,8 @@ export default function SingleShopSection() {
                           , <Link href="#">{catName}</Link>
                         </>
                       )}
-                    </li>
+                    </li> 
+                    
                   </ul>
                 </div>
 
@@ -1112,8 +1114,7 @@ export default function SingleShopSection() {
               <h2>Produtos relacionados</h2>
             </div>
           </div>
-
-          <div className="container">
+            <div className="container">
             <div className="row">
               {related.slice(0, 4).map((p) => {
                 const pId = p?._id;
@@ -1156,9 +1157,8 @@ export default function SingleShopSection() {
             </div> 
           </div>
         </div>
-      )}
+      )} 
 
- 
       <Lightbox
         open={lbOpenProduct}
         close={() => setLbOpenProduct(false)}
@@ -1166,9 +1166,7 @@ export default function SingleShopSection() {
         slides={lbSlidesProduct}
         on={{ view: ({ index: i }) => setLbIndexProduct(i) }}
         carousel={{ finite: false }}
-      />
-
-       
+      /> 
       <Lightbox
         open={lbOpenExamples}
         close={() => setLbOpenExamples(false)}
