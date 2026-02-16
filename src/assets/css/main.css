@@ -4496,6 +4496,8 @@ body .transparent-header  .site-navbar .contact-badge a{
 
 body.dark-wave .services-row-items .col-xl-4 .tekup-iconbox-wrap4,
 body.dark-wave .about-page-area .abt-st,
+body.dark-wave #append-menu-header,
+body.dark-wave #append-menu-header div,
 body.dark-wave .wl-filter-card{
   background-color:#1c1f24 !important;
   color:#dcdfe4;
@@ -4528,6 +4530,10 @@ body.dark-wave .drop-downlanguage span,
 body.dark-wave .drop-downlanguage p,
 body.dark-wave .drop-downlanguage button, 
 body.dark-wave .drop-downlanguage a,
+body.dark-wave #append-menu-header div,
+body.dark-wave #append-menu-header span,
+body.dark-wave #append-menu-header a,
+body.dark-wave #append-menu-header li,
 body.dark-wave  .wl-filter-card label{
   color:#dcdfe4 !important;
 }
@@ -4784,4 +4790,68 @@ body .single-portofolio-area article img{
   max-height:440px !important;
 }
 
- 
+
+body.dark-wave .mobile-menu-close{
+  font-size:40px !important;
+}
+
+
+@media screen and (max-width:900px){ 
+  body .dropdown-lang {
+    min-width:auto !important;
+  }
+
+  body .tekup-header-bottom .contact-badge{
+      width:100%;
+      display:none;
+  } 
+
+   body #append-menu-header .site-menu-main .ml-4{
+     margin-left:0px !important;
+   }
+
+  body #append-menu-header .site-menu-main > li > a{
+     border-bottom:1px solid #6b7280 !important;
+     padding:10px 20px !important;
+     height: auto !important;
+  }
+
+  body .tekup-product-tab .tab-content li{
+     align-items: flex-start !important;
+     display: flex;
+  }
+
+  body .tekup-product-tab .tab-content li p{
+    display: flex;
+    flex-wrap: wrap;
+  }
+    body .tekup-product-tab .tab-content li p strong{ 
+      min-width:85%;
+      width:85%;
+    }
+
+    body .svg-chip{
+      display: none;
+    }
+
+     body .tekup-product-tab  strong{
+      line-height:30px;
+     }
+
+     body .tekup-related-product-section .tekup-shop-thumb  img,
+     body .tekup-related-product-section .tekup-shop-thumb {
+        width:100%;
+        min-width:100%;
+        background-color:#fff;
+        border-radius:10px;
+     }
+
+     body #counter-home-four img{
+        margin-top:20px !important;
+     }
+
+     body .image-home{
+        height:auto !important;
+        min-height:auto !important;
+     }
+}
