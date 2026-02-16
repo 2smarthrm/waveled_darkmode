@@ -1,30 +1,28 @@
-// melhoara conteudo do meu file .jsx , a idiea. usar uma linguagem mais respeitosa e formal pois estamsoa a lidar com cleinets :
+ 
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-/** ----------------- Config ----------------- */
+ 
 const isBrowser = typeof window !== "undefined";
 const protocol = isBrowser && window.location.protocol === "https:" ? "https" : "http";
 const BaseUrl = protocol === "https"  ?  'https://waveledserver.vercel.app' : "http://localhost:4000";
 
-/** Email tolerante (lado cliente). O servidor é a última palavra. */
+ 
 const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-/** Telefone: permite +código país, espaços, parênteses e hífens; 9–15 dígitos no total */
+ 
 const PHONE_DIGITS_MIN = 9;
 const PHONE_DIGITS_MAX = 15;
 const onlyDigitsPlus = (s) => s.replace(/[^\d+]/g, "");
 const countDigits = (s) => (s.match(/\d/g) ?? []).length;
 
-/** Estado inicial do formulário */
+ 
 const initialState = {
   nome: "",
   telefone: "",
   email: "",
-  tipo: "info", // "info" | "quote"
-  mensagem: "",
-  // Campos extra para orçamento
+  tipo: "info", 
+  mensagem: "", 
   solucao: "",
   datas: "",
   local: "",
@@ -32,7 +30,7 @@ const initialState = {
   orcamentoPrevisto: "",
   precisaMontagem: "sim",
   consent: false,
-  _hp: "", // honeypot (DEVE ficar vazio)
+  _hp: "", 
 };
 
 function getUtmFromUrl() {
@@ -55,10 +53,10 @@ export default function ContactSection() {
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState("idle"); // "idle" | "success" | "error"
+  const [status, setStatus] = useState("idle");  
   const [serverMsg, setServerMsg] = useState("");
 
-  // Guardar UTM e página atual
+ 
   const [meta, setMeta] = useState({ utm: null, page: "" });
 
   useEffect(() => {
@@ -79,15 +77,14 @@ export default function ContactSection() {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-
-  /** Validação cliente (tolerante; o servidor manda) */
+ 
   const validate = () => {
     const e = {};
-    if (!form.nome.trim()) e.nome = "Indica o teu nome.";
+    if (!form.nome.trim()) e.nome = "Indica o teu nome !";
     if (!form.email.trim()) {
-      e.email = "Indica o teu email.";
+      e.email = "Indica o teu email !";
     } else if (!EMAIL_RX.test(form.email.trim())) {
-      e.email = "Email inválido.";
+      e.email = "Email inválido !";
     }
 
     if (!form.telefone.trim()) {
@@ -99,22 +96,21 @@ export default function ContactSection() {
       }
     }
 
-    if (!form.mensagem.trim()) e.mensagem = "Escreve a tua mensagem.";
-    if (!form.consent) e.consent = "É necessário consentimento para contacto.";
+    if (!form.mensagem.trim()) e.mensagem = "Escreve a tua mensagem !";
+    if (!form.consent) e.consent = "É necessário consentimento para contacto !";
 
     if (showQuoteFields) {
-      if (!form.solucao.trim()) e.solucao = "Seleciona a solução pretendida.";
-      if (!form.datas.trim()) e.datas = "Indica datas ou período.";
-      if (!form.local.trim()) e.local = "Indica o local (cidade/venue).";
-      if (!form.dimensoes.trim()) e.dimensoes = "Indica dimensões/área aproximada.";
+      if (!form.solucao.trim()) e.solucao = "Seleciona a solução pretendida !";
+      if (!form.datas.trim()) e.datas = "Indica datas ou período !";
+      if (!form.local.trim()) e.local = "Indica o local (cidade/venue) !";
+      if (!form.dimensoes.trim()) e.dimensoes = "Indica dimensões/área aproximada !";
     }
 
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
-  const buildPayload = () => {
-    // Normaliza telefone para aproximar o backend e manter legibilidade mínima
+  const buildPayload = () => { 
     const normalizedPhone = onlyDigitsPlus(form.telefone).replace(/(\+\d{2,3})(\d+)/, "$1 $2");
 
     return {
@@ -130,25 +126,24 @@ export default function ContactSection() {
       orcamentoPrevisto: showQuoteFields ? form.orcamentoPrevisto.trim() : "",
       precisaMontagem: showQuoteFields ? form.precisaMontagem : "nao",
       mensagem: form.mensagem.trim(),
-      consent: true, // força true para satisfazer backends que exigem boolean true
+      consent: true, 
       utm: meta.utm,
       page: meta.page,
     };
   };
 
-  /** Mapeia 422 do servidor (Zod/express-validator/Joi) para {campo: msg} */
+ 
   const toFieldErrors = (json) => {
     const fieldErrors = {};
-
-    // express-validator: [{param,msg}]
+ 
     if (Array.isArray(json?.errors)) {
       json.errors.forEach((i) => {
         const field = i?.param || i?.path?.[0] || i?.field || "";
-        if (field) fieldErrors[field] = i?.msg || i?.message || "Campo inválido";
+        if (field) fieldErrors[field] = i?.msg || i?.message || "Campo inválido !";
       });
     }
 
-    // Zod: { issues: [{ path: ['obj','campo'], message }] }
+ 
     if (Array.isArray(json?.issues)) {
       json.issues.forEach((i) => {
         const path = i?.path;
@@ -157,11 +152,10 @@ export default function ContactSection() {
           i?.param ||
           i?.field ||
           "";
-        if (field) fieldErrors[field] = i?.message || i?.msg || "Campo inválido";
+        if (field) fieldErrors[field] = i?.message || i?.msg || "Campo inválido !";
       });
     }
-
-    // Joi/celebrate: { details: [{ path: ['campo'], message }] }
+ 
     if (Array.isArray(json?.details)) {
       json.details.forEach((i) => {
         const path = i?.path;
@@ -170,7 +164,7 @@ export default function ContactSection() {
           i?.context?.key ||
           i?.param ||
           "";
-        if (field) fieldErrors[field] = i?.message || "Campo inválido";
+        if (field) fieldErrors[field] = i?.message || "Campo inválido !";
       });
     }
 
@@ -194,7 +188,7 @@ export default function ContactSection() {
       const res = await fetch(`${BaseUrl}/api/public/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // atenção a CORS do servidor!
+        credentials: "include",  
         body: JSON.stringify(payload),
       });
 
@@ -205,8 +199,7 @@ export default function ContactSection() {
         json = null;
       }
 
-      if (!res.ok) {
-        // Debug completo
+      if (!res.ok) { 
         console.error("[ContactSection] Erro no envio", {
           status: res.status,
           statusText: res.statusText,
@@ -231,8 +224,7 @@ export default function ContactSection() {
         }
         return;
       }
-
-      // Sucesso
+ 
       console.info("[ContactSection] Enviado com sucesso.", { json, payload });
       setStatus("success");
       setServerMsg(json?.message || "Pedido recebido com sucesso.");
@@ -250,8 +242,7 @@ export default function ContactSection() {
   <>
     <div className="section tekup-section-padding">
       <div className="container">
-        <div className="row align-items-start">
-          {/* Bloco de conteúdo – Sobre nós */}
+        <div className="row align-items-start"> 
           <div className="col-xl-5 col-lg-6 d-flex align-items-center">
             <div className="tekup-default-content">
               <h2>Soluções LED que unem eficiência, qualidade e design moderno</h2>
@@ -293,8 +284,7 @@ export default function ContactSection() {
               </div>
             </div>
           </div>
-
-          {/* Formulário */}
+ 
           <div className="col-xl-6 offset-xl-1 col-lg-6">
             <div className="tekup-main-form">
               <h3>Fale connosco</h3>
@@ -313,8 +303,7 @@ export default function ContactSection() {
                 </div>
               )}
 
-              <form onSubmit={onSubmit} noValidate>
-                {/* Honeypot invisível */}
+              <form onSubmit={onSubmit} noValidate> 
                 <input
                   type="text"
                   name="_hp"
@@ -407,8 +396,7 @@ export default function ContactSection() {
                       {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                     </div>
                   </div>
-
-                  {/* Campos específicos para orçamento */}
+ 
                   {showQuoteFields && (
                     <>
                       <div className="col-lg-12">
@@ -610,8 +598,7 @@ export default function ContactSection() {
                 </div>
               </form>
             </div>
-          </div>
-          {/* /Formulário */}
+          </div> 
         </div>
       </div>
     </div>

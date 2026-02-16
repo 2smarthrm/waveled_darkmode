@@ -94,13 +94,12 @@ const HeaderFourInner = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  
   useEffect(() => {
     checkDarkMode();
     setActiveMenu(null);
-    setIsActive(false); 
+    setIsActive(false);
     setTimeout(() => {
-      if(typeof window !== "undefined"){  
+      if (typeof window !== "undefined") {
         window.scrollBy(0, 4);
         setTimeout(() => {
           window.scrollBy(0, -104);
@@ -109,7 +108,6 @@ const HeaderFourInner = () => {
       }
     }, 10);
   }, [pathname, searchParams?.toString()]);
- 
 
   const computeShouldBeTransparent = useCallback(() => {
     if (typeof window === "undefined") return false;
@@ -123,8 +121,12 @@ const HeaderFourInner = () => {
 
     const targets = Array.from(
       document.querySelectorAll(
-        ".blur-slide-screen, .video-shop-large-section, body.dark-wave, body.dark-wave section, body.dark-wave .tekup-related-product-section,body.dark-wave .about-page-area,  body.dark-wave .service-img,  body.dark-wave.services-section, body.dark-wave .video-area,    .heroFull,  body.dark-wave .section, body.dark-wave .product-area, body.dark-wave .categorie-page,  body.dark-wave, body.dark-wave .product-category-section"
-      )
+        `.blur-slide-screen, .video-shop-large-section, body.dark-wave, body.dark-wave section,  body.dark-wave footer, 
+        .wl-prefooter-cta,  body.dark-wave .tekup-related-product-section,body.dark-wave .about-page-area,  
+        body.dark-wave .service-img,  body.dark-wave.services-section, body.dark-wave .video-area,   
+        .heroFull,  body.dark-wave .section, body.dark-wave .product-area, body.dark-wave .categorie-page,  
+        body.dark-wave, body.dark-wave .product-category-section`,
+      ),
     );
     if (!targets.length) return false;
 
@@ -136,22 +138,22 @@ const HeaderFourInner = () => {
     });
   }, [activeMenu]);
 
- 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
     setIsTransparent(computeShouldBeTransparent());
   }, [computeShouldBeTransparent]);
 
- 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const update = () => setIsTransparent(computeShouldBeTransparent());
     const observer = new MutationObserver(update);
-    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
     return () => observer.disconnect();
   }, [computeShouldBeTransparent]);
 
- 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -198,7 +200,7 @@ const HeaderFourInner = () => {
       });
 
       const hasChildren = e.target.closest(
-        ".nav-item-has-children, .sub-menu-item-hover"
+        ".nav-item-has-children, .sub-menu-item-hover",
       );
       if (hasChildren) {
         e.preventDefault();
@@ -306,10 +308,26 @@ const HeaderFourInner = () => {
   const carouselCfg = useMemo(
     () => ({
       responsive: {
-        desktop: { breakpoint: { max: 3000, min: 1025 }, items: 5, slidesToSlide: 5 },
-        tabletLg: { breakpoint: { max: 1304, min: 1000 }, items: 4, slidesToSlide: 4 },
-        tablet: { breakpoint: { max: 600, min: 481 }, items: 1, slidesToSlide: 1 },
-        mobile: { breakpoint: { max: 480, min: 0 }, items: 1, slidesToSlide: 1 },
+        desktop: {
+          breakpoint: { max: 3000, min: 1025 },
+          items: 5,
+          slidesToSlide: 5,
+        },
+        tabletLg: {
+          breakpoint: { max: 1304, min: 1000 },
+          items: 4,
+          slidesToSlide: 4,
+        },
+        tablet: {
+          breakpoint: { max: 600, min: 481 },
+          items: 1,
+          slidesToSlide: 1,
+        },
+        mobile: {
+          breakpoint: { max: 480, min: 0 },
+          items: 1,
+          slidesToSlide: 1,
+        },
       },
       arrows: true,
       infinite: false,
@@ -326,7 +344,7 @@ const HeaderFourInner = () => {
       itemClass: "rmc-item",
       sliderClass: "rmc-slider",
     }),
-    []
+    [],
   );
 
   const onMegaLinkClick = useCallback(() => {
@@ -346,9 +364,12 @@ const HeaderFourInner = () => {
     const handleClickOutside = (e) => {
       if (!activeMenu) return;
       const menuEl = document.querySelector(".sub-menu-box");
-      const triggerElSolutions = document.querySelector('[data-trigger="solutions"]');
+      const triggerElSolutions = document.querySelector(
+        '[data-trigger="solutions"]',
+      );
       const isInsideMenu = menuEl && menuEl.contains(e.target);
-      const isOnTrigger = triggerElSolutions && triggerElSolutions.contains(e.target);
+      const isOnTrigger =
+        triggerElSolutions && triggerElSolutions.contains(e.target);
       if (!isInsideMenu && !isOnTrigger) setActiveMenu(null);
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -365,9 +386,10 @@ const HeaderFourInner = () => {
 
   const headerIsWhite = !!activeMenu || !isTransparent;
   const logoSrc = headerIsWhite ? LOGO_DARK : LOGO_LIGHT;
-  const logoAlt = headerIsWhite ? "Waveled (logo preto)" : "Waveled (logo branco)";
+  const logoAlt = headerIsWhite
+    ? "Waveled (logo preto)"
+    : "Waveled (logo branco)";
 
- 
   function checkDarkMode() {
     let status = true;
     if (!localStorage.getItem("theme-status")) {
@@ -414,7 +436,9 @@ const HeaderFourInner = () => {
     >
       <style jsx>{`
         #site-header-area .tekup-header-bottom {
-          transition: background 0.18s ease, box-shadow 0.18s ease;
+          transition:
+            background 0.18s ease,
+            box-shadow 0.18s ease;
         }
         .contact-badge {
           padding: 2px 20px;
@@ -438,8 +462,12 @@ const HeaderFourInner = () => {
         }
         #site-header-area[data-header-mode="glass"] .nav-link-item,
         #site-header-area[data-header-mode="glass"] .nav-link-item.drop-trigger,
-        #site-header-area[data-header-mode="glass"] .tekup-header-info-box-data h6,
-        #site-header-area[data-header-mode="glass"] .tekup-header-info-box-data p {
+        #site-header-area[data-header-mode="glass"]
+          .tekup-header-info-box-data
+          h6,
+        #site-header-area[data-header-mode="glass"]
+          .tekup-header-info-box-data
+          p {
           color: rgba(255, 255, 255, 0.92) !important;
         }
         #site-header-area[data-header-mode="glass"] .nav-link-item:hover {
@@ -447,8 +475,12 @@ const HeaderFourInner = () => {
         }
         #site-header-area[data-header-mode="white"] .nav-link-item,
         #site-header-area[data-header-mode="white"] .nav-link-item.drop-trigger,
-        #site-header-area[data-header-mode="white"] .tekup-header-info-box-data h6,
-        #site-header-area[data-header-mode="white"] .tekup-header-info-box-data p {
+        #site-header-area[data-header-mode="white"]
+          .tekup-header-info-box-data
+          h6,
+        #site-header-area[data-header-mode="white"]
+          .tekup-header-info-box-data
+          p {
           color: #111 !important;
         }
         .header-force-white .tekup-header-bottom {
@@ -501,28 +533,44 @@ const HeaderFourInner = () => {
             </div>
 
             <div className="menu-block-wrapper">
-              <div className="menu-overlay" onClick={() => setIsActive(false)}></div>
+              <div
+                className="menu-overlay"
+                onClick={() => setIsActive(false)}
+              ></div>
 
-              <nav className={`menu-block ${isActive ? "active" : ""}`} id="append-menu-header">
+              <nav
+                className={`menu-block ${isActive ? "active" : ""}`}
+                id="append-menu-header"
+              >
                 <div className="mobile-menu-head">
                   <div>
                     <Link href={"/"}>
                       <img
-                        src="https://ik.imagekit.io/fsobpyaa5i/Waveled_logo-02%20(1)%20(4).png"
+                        src={logoSrc}
+                        alt={logoAlt}
                         style={{ maxWidth: "160px", marginLeft: "20px" }}
-                        alt=""
+                        onError={(e) => {
+                          e.currentTarget.src = LOGO_DARK;
+                        }}
                       />
                     </Link>
                   </div>
                   <div className="current-menu-title"></div>
-                  <div className="mobile-menu-close" onClick={() => setIsActive(false)}>
+                  <div
+                    className="mobile-menu-close"
+                    onClick={() => setIsActive(false)}
+                  >
                     &times;
                   </div>
                 </div>
 
                 <ul className="site-menu-main" onClick={menuMainClickHandler}>
                   <li className="nav-item d-none">
-                    <Link href="/" className="nav-link-item drop-trigger" onClick={onMegaLinkClick}>
+                    <Link
+                      href="/"
+                      className="nav-link-item drop-trigger"
+                      onClick={onMegaLinkClick}
+                    >
                       Início
                     </Link>
                   </li>
@@ -540,7 +588,11 @@ const HeaderFourInner = () => {
                     )}
                   </li>
                   <li className="nav-item">
-                    <Link href="/service" className="nav-link-item drop-trigger" onClick={onMegaLinkClick}>
+                    <Link
+                      href="/service"
+                      className="nav-link-item drop-trigger"
+                      onClick={onMegaLinkClick}
+                    >
                       Serviços
                     </Link>
                   </li>
@@ -550,10 +602,22 @@ const HeaderFourInner = () => {
                     ) : (
                       <Link
                         className="nav-link-item drop-trigger"
-                        href="//solution?area=695b880b926032a07bbefef7"
+                        href="/solution?area=695b880b926032a07bbefef7"
                       >
                         Soluções
                       </Link>
+                    )}
+                  </li>
+                  <li className="nav-item">
+                    {WindowSize <= 900 ? (
+                      <Link
+                        className="nav-link-item drop-trigger"
+                        href="contact-us"
+                      >
+                        Contactos
+                      </Link>
+                    ) : (
+                      <></>
                     )}
                   </li>
                 </ul>
@@ -561,16 +625,22 @@ const HeaderFourInner = () => {
             </div>
             <div className="header-btn d-flex header-btn-l1 ms-auto">
               <li className="nav-item contact-badge ">
-                <Link href="contact-us" className="nav-link-item" onClick={onMegaLinkClick}>
+                <Link
+                  href="contact-us"
+                  className="nav-link-item"
+                  onClick={onMegaLinkClick}
+                >
                   Contactos
                 </Link>
               </li>
-
               <div className="toggle-dark-theme" onClick={() => ToggleTheme()}>
                 {IsSiteDark ? <GoSun /> : <RiMoonFoggyLine />}
               </div>
               <div className="tekup-header-icon">
-                <div className="tekup-header-barger dark" onClick={() => setSideBar(!sideBar)}>
+                <div
+                  className="tekup-header-barger dark"
+                  onClick={() => setSideBar(!sideBar)}
+                >
                   <span></span>
                 </div>
               </div>
@@ -580,7 +650,10 @@ const HeaderFourInner = () => {
               <div className="lang-block">
                 <LanguageSwitcher />
               </div>
-              <div className="mobile-menu-trigger" onClick={() => setIsActive(true)}>
+              <div
+                className="mobile-menu-trigger"
+                onClick={() => setIsActive(true)}
+              >
                 <span></span>
               </div>
             </div>
@@ -610,16 +683,21 @@ const HeaderFourInner = () => {
             </div>
 
             <p className="mb-3">
-              <strong>Soluções LED que unem eficiência, qualidade e design moderno</strong>
-              <br />
-              A Waveled é uma empresa inovadora especializada em soluções LED de iluminação e display.
-              Apoiamos marcas, eventos e espaços comerciais com projetos chave-na-mão: consultoria,
-              conceção, instalação, operação e manutenção. O nosso foco é entregar impacto visual,
-              eficiência energética  e fiabilidade.
+              <strong>
+                Soluções LED que unem eficiência, qualidade e design moderno
+              </strong>
+              <br />A Waveled é uma empresa inovadora especializada em soluções
+              LED de iluminação e display. Apoiamos marcas, eventos e espaços
+              comerciais com projetos chave-na-mão: consultoria, conceção,
+              instalação, operação e manutenção. O nosso foco é entregar impacto
+              visual, eficiência energética e fiabilidade.
             </p>
 
             <div className="tekup-sidemenu-thumb">
-              <img src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20(29).jpg"  alt="Waveled Led Solutions"  />
+              <img
+                src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20(29).jpg"
+                alt="Waveled Led Solutions"
+              />
             </div>
 
             <div className="tekup-contact-info-wrap">
@@ -627,7 +705,7 @@ const HeaderFourInner = () => {
                 <i className="ri-map-pin-2-fill"></i>
                 <h5>Endereço</h5>
                 <p className="m-0">
-                  Rua Fernando Farinha nº 2A e 2B 
+                  Rua Fernando Farinha nº 2A e 2B
                   <br />
                   Braço de Prata, 1950-448 Lisboa
                 </p>
@@ -643,15 +721,24 @@ const HeaderFourInner = () => {
             </div>
           </div>
 
-          <span className="tekup-sidemenu-close" onClick={() => setSideBar(false)}>
+          <span
+            className="tekup-sidemenu-close"
+            onClick={() => setSideBar(false)}
+          >
             <i className="ri-close-line"></i>
           </span>
         </div>
 
-        <div className="offcanvas-overlay" onClick={() => setSideBar(false)}></div>
+        <div
+          className="offcanvas-overlay"
+          onClick={() => setSideBar(false)}
+        ></div>
       </div>
 
-      <div className={`offcanvas-overlay ${sideBar ? "active" : ""}`} onClick={() => setSideBar(false)}></div>
+      <div
+        className={`offcanvas-overlay ${sideBar ? "active" : ""}`}
+        onClick={() => setSideBar(false)}
+      ></div>
     </header>
   );
 };
