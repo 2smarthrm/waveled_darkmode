@@ -4495,9 +4495,7 @@ body .transparent-header  .site-navbar .contact-badge a{
 
 
 body.dark-wave .services-row-items .col-xl-4 .tekup-iconbox-wrap4,
-body.dark-wave .about-page-area .abt-st,
-body.dark-wave #append-menu-header,
-body.dark-wave #append-menu-header div,
+body.dark-wave .about-page-area .abt-st, 
 body.dark-wave .wl-filter-card{
   background-color:#1c1f24 !important;
   color:#dcdfe4;
@@ -4854,4 +4852,11 @@ body.dark-wave .mobile-menu-close{
         height:auto !important;
         min-height:auto !important;
      }
+
+     body.dark-wave #append-menu-header,
+    body.dark-wave #append-menu-header div {
+      background-color:#1c1f24 !important;
+      color:#dcdfe4;
+      border: none;
+    }
 }
