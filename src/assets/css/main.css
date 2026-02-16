@@ -4703,8 +4703,8 @@ body .tekup-main-form #consent{
 }
 
 
-body .dropdown-lang{
-   min-width:200px;
+body .lang-block .drop-downlanguage{
+   min-width:200px !important;
 }
 
 
