@@ -4859,4 +4859,8 @@ body.dark-wave .mobile-menu-close{
       color:#dcdfe4;
       border: none;
     }
+
+    body .slider-card.no-bg h4{
+      font-size:18px !important;
+    }
 }
