@@ -155,8 +155,7 @@ export default function FooterFore(props) {
                     Waveled é uma empresa inovadora especializada em soluções
                     display led, unindo eficiência, qualidade e design moderno.
                   </p>
-
-                  {/* Newsletter UI (abaixo da descrição do 1º bloco) */}
+ 
                   <form
                     onSubmit={handleNewsletterSubmit}
                     className="wl-newsletter"
@@ -205,8 +204,7 @@ export default function FooterFore(props) {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          className="social-link"
+                        <Link   className="social-link"
                           href="#"
                           style={linkStyle}
                         >
@@ -289,8 +287,7 @@ export default function FooterFore(props) {
                           </Link>
                         </li>
                       ))}
-
-                      {/* link fixo para ver mais soluções */}
+ 
                       <li style={{ marginTop: "10px" }}>
                         <Link
                           href="/solution?area=695b880b926032a07bbefef7"

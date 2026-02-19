@@ -1,4 +1,7 @@
+
+// #f2f3fc -      
 "use client"
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +18,7 @@ const ChooseUsSection = ({ className }) => {
             <h4 className="text-dark rainbow-run rainbow-text">
                Distribuímos Luz  e imagem para  todos os  cantos do Globo 
             </h4>
-            <p >
+            <p className="text-secondary">
               Somos uma empresa focada na <strong>distribuição de displays LED </strong> 
               para publicidade, eventos, design, decoração , arquitetura e ambientes imersivos.  
               Combinamos tecnologia, criatividade e experiência para oferecer 
