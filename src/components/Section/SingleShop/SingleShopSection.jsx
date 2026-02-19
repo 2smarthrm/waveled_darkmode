@@ -1,16 +1,19 @@
-"use client"; 
+"use client";
+
 import Link from "next/link";
 import { useEffect, useMemo, useState, useRef } from "react"; 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css"; 
 import { Placeholder } from "react-bootstrap";
 import RequestModal from "../Common/RequestBudgetModal/RequestModal";
- 
 
 const isBrowser = typeof window !== "undefined";
-const protocol =  isBrowser && window.location.protocol === "https:" ? "https" : "http";
-const API_BASE =  protocol === "https" ? "https://waveledserver.vercel.app" : "http://localhost:4000";
-const IMG_HOST = protocol === "https" ? "https://waveledserver.vercel.app"  : "http://localhost:4000";
+const protocol =
+  isBrowser && window.location.protocol === "https:" ? "https" : "http";
+const API_BASE =
+  protocol === "https" ? "https://waveledserver.vercel.app" : "http://localhost:4000";
+const IMG_HOST =
+  protocol === "https" ? "https://waveledserver.vercel.app"  : "http://localhost:4000";
 
 const isAbsoluteUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u);
 const withHost = (u) => (u ? (isAbsoluteUrl(u) ? u : `${IMG_HOST}${u}`) : "");
@@ -148,8 +151,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
  
     return all.slice(0, PREVIEW_REAL_ITEMS);
   }, [all, showAllGrid, hasMoreThanThreshold]);
-  
-
+ 
   const moreBgImage = useMemo(() => {
     if (!hasMoreThanThreshold) return "";
     const eighth = all[PREVIEW_REAL_ITEMS];  
@@ -158,7 +160,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
 
   return (
     <div className="pi-wrap" onKeyDown={onKeyDown}>
-      
+      {/* TABS */}
       <div className="pi-tabs-top" role="tablist" aria-label="Exemplos">
         <button
           type="button"
@@ -180,7 +182,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
         </button>
       </div>
 
- 
+      {/* ===== VISTA: Recomendações Waveled ===== */}
       {view === "recomendacoes" && len > 0 && (
         <div className="pi-root">
           <div
@@ -263,7 +265,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
         </div>
       )}
 
- 
+      {/* ===== VISTA: Ver todos exemplos (grid) ===== */}
       {view === "mais" && (
         <div className="pi-grid-wrap" aria-label="Grelha de exemplos">
           <div className="pi-grid">
@@ -283,7 +285,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
               </button>
             ))}
 
- 
+            {/* Tile +X: só quando existir MAIS DE 8 itens */}
             {showMoreTile && (
               <button
                 type="button"
@@ -786,7 +788,7 @@ export default function SingleShopSection() {
             const relAll = toArray(relRaw);
             relatedList = relAll.filter((p) => p?._id !== prod._id);
           } catch {
-             
+            /* ignore */
           }
         }
 
@@ -802,7 +804,7 @@ export default function SingleShopSection() {
             const fillers = more.filter((p) => !forbiddenIds.has(p._id));
             relatedList = [...relatedList, ...fillers];
           } catch {
-         
+            /* ignore */
           }
         }
 
@@ -836,12 +838,11 @@ export default function SingleShopSection() {
 
   const title = safeText(item?.wl_name, "Produto");
   const catName = safeText(item?.wl_category?.wl_name, "Sem categoria");
-  const shortDescription = safeText(item?.wl_specs_text, "");  
+  const shortDescription = safeText(item?.wl_specs_text, "");
 
- 
   const examplesRest = useMemo(() => (examples || []).slice(4), [examples]);
 
- 
+  // -------- Lightbox do produto (YARL) --------
   const [lbOpenProduct, setLbOpenProduct] = useState(false);
   const [lbIndexProduct, setLbIndexProduct] = useState(0);
   const lbSlidesProduct = useMemo(
@@ -852,7 +853,8 @@ export default function SingleShopSection() {
     setLbIndexProduct(i);
     setLbOpenProduct(true);
   };
- 
+
+  // -------- Lightbox dos exemplos (YARL) — mantém para o bloco de baixo --------
   const [lbOpenExamples, setLbOpenExamples] = useState(false);
   const [lbIndexExamples, setLbIndexExamples] = useState(0);
   const lbSlidesExamples = useMemo(
@@ -882,7 +884,7 @@ export default function SingleShopSection() {
 
   return (
     <>
-  
+      {/* BLOCO DINÂMICO (só se houver exemplos) */}
       {(examples || []).length > 0 && (
         <section className="section bg-grey pt-4">
           <div className="container pt-4 pb-4">
@@ -893,18 +895,15 @@ export default function SingleShopSection() {
 
       <div className="section">
         <br /><br /><br /> 
-        <title>{title}</title>
-        <meta name="description" content={`${shortDescription}`} />
         <div className="container">
           <div className="row align-items-center">
-         
+            {/* GALERIA */}
             <div className="col-lg-6">
               <div className="tekup-tab-slider">
                 <div className="tekup-tabs-container">
                   <div className="tekup-tabs-wrapper">
                     <div className="tabContent">
                       <img
-                      className="main-selected-image"
                         src={
                           (images[activeImage] || "").startsWith("http")
                             ? images[activeImage]
@@ -958,7 +957,7 @@ export default function SingleShopSection() {
               </div>
             </div>
 
-           
+            {/* DETALHES */}
             <div className="col-lg-6">
               <div className="tekup-details-content pt-4">
                 <h2 className="mt-0">{title}</h2> <br />
@@ -984,8 +983,7 @@ export default function SingleShopSection() {
                           , <Link href="#">{catName}</Link>
                         </>
                       )}
-                    </li> 
-                    
+                    </li>
                   </ul>
                 </div>
 
@@ -1009,7 +1007,7 @@ export default function SingleShopSection() {
         </div>
       </div>
 
-       
+      {/* TABS */}
       <br />
       <div className="section tekup-section-padding pt-5 pb-2">
         <div className="container">
@@ -1057,7 +1055,7 @@ export default function SingleShopSection() {
         </div>
       </div>
 
- 
+      {/* BLOCOS ADICIONAIS (restantes exemplos) */}
       {examplesRest.length > 0 && (
         <section className="mt-4 bg-black product-details-slider-solution">
           <div className="section tekup-section-padding">
@@ -1114,7 +1112,8 @@ export default function SingleShopSection() {
               <h2>Produtos relacionados</h2>
             </div>
           </div>
-            <div className="container">
+
+          <div className="container">
             <div className="row">
               {related.slice(0, 4).map((p) => {
                 const pId = p?._id;
@@ -1151,14 +1150,15 @@ export default function SingleShopSection() {
                         <small className="text-muted">Categoria: {pCat}</small>
                       </div>
                     </div>
-                  </div> 
+                  </div>
                 );
               })}
             </div> 
           </div>
         </div>
-      )} 
+      )}
 
+      {/* Lightbox da galeria principal (YARL) */}
       <Lightbox
         open={lbOpenProduct}
         close={() => setLbOpenProduct(false)}
@@ -1166,7 +1166,9 @@ export default function SingleShopSection() {
         slides={lbSlidesProduct}
         on={{ view: ({ index: i }) => setLbIndexProduct(i) }}
         carousel={{ finite: false }}
-      /> 
+      />
+
+      {/* Lightbox dos exemplos (YARL) */}
       <Lightbox
         open={lbOpenExamples}
         close={() => setLbOpenExamples(false)}
@@ -1178,17 +1180,3 @@ export default function SingleShopSection() {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

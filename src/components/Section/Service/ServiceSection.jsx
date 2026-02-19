@@ -131,7 +131,7 @@ const Sections = [
     image:
       "https://images.pexels.com/photos/7682087/pexels-photo-7682087.jpeg",
 over_text: { 
-  text_1: "Assistência sempre disponível  ",
+  text_1: "Assistência sempre disponível",
   text_2: "Suporte remoto e no local"
 }
 
@@ -139,8 +139,10 @@ over_text: {
   { 
     title: "Orçamentação",
     reverse: true,
-    description:"Propostas transparentes e comparáveis: dimensionamento, TCO (custo total de propriedade), consumo energético estimado, opções de financiamento e prazos de entrega. Indicamos o ROI esperado por cenário (retalho, eventos, corporate) e alinhamos tudo com o teu budget — sem surpresas, só clareza.",
-    image:"https://images.pexels.com/photos/8297017/pexels-photo-8297017.jpeg",
+    description:
+      "Propostas transparentes e comparáveis: dimensionamento, TCO (custo total de propriedade), consumo energético estimado, opções de financiamento e prazos de entrega. Indicamos o ROI esperado por cenário (retalho, eventos, corporate) e alinhamos tudo com o teu budget — sem surpresas, só clareza.",
+    image:
+      "https://images.pexels.com/photos/4386373/pexels-photo-4386373.jpeg",
     over_text: { text_1: "Propostas que convencem", text_2: "ROI • TCO • Financiamento" },
   },
 ];
@@ -148,35 +150,35 @@ over_text: {
 
 
 
-const [LoadingStatus,SetLoadingStatus] =  useState(null);
-const [LoadingData, SetLoadingData] =  useState([]); 
-const isBrowser = typeof window !== "undefined";
-const protocol = isBrowser && window.location.protocol === "https:" ? "https" : "http";
-const BaseUrl = protocol === "https"  ?  'https://waveledserver.vercel.app' : "http://localhost:4000";
-
-  async function LoadData(){
-    try {
-      const response = await axios.get(BaseUrl+"/api/featured", {withCredentials: true });
-      const data = response?.data?.data ? response?.data?.data : [];
-      SetLoadingData(data); 
-
-      console.clear();
-      console.log(response);
-
-
-
-    } catch (error){
-        console.clear();
-        console.log(error);
-    } finally { 
-
-    }
-    SetLoadingStatus(true);
-  }
-
-  useEffect(() => {
-      LoadData();
-  }, []);
+        const [LoadingStatus,SetLoadingStatus] =  useState(null);
+        const [LoadingData, SetLoadingData] =  useState([]); 
+        const isBrowser = typeof window !== "undefined";
+        const protocol = isBrowser && window.location.protocol === "https:" ? "https" : "http";
+        const BaseUrl = protocol === "https"  ?  'https://waveledserver.vercel.app' : "http://localhost:4000";
+      
+         async function LoadData(){
+            try {
+              const response = await axios.get(BaseUrl+"/api/featured", {withCredentials: true });
+              const data = response?.data?.data ? response?.data?.data : [];
+              SetLoadingData(data); 
+    
+              console.clear();
+              console.log(response);
+    
+    
+    
+            } catch (error){
+               console.clear();
+               console.log(error);
+            } finally { 
+      
+            }
+            SetLoadingStatus(true);
+          }
+      
+          useEffect(() => {
+             LoadData();
+          }, []);
 
   return (
     <>
@@ -196,6 +198,7 @@ const BaseUrl = protocol === "https"  ?  'https://waveledserver.vercel.app' : "h
               </div>
             </div>
           </div>
+
           {item.video ? 
             <section className="video-area">
               <img 

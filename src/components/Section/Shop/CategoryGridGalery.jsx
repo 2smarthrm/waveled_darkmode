@@ -5,22 +5,22 @@ import axios from "axios";
 import Lightbox from "react-awesome-lightbox";
 import "react-awesome-lightbox/build/style.css";
 
-// Base para API e imagens
+ 
 const isBrowser = typeof window !== "undefined";
 const protocol = isBrowser && window.location.protocol === "https:" ? "https" : "http";
 const API_BASE = protocol === "https"  ?  'https://waveledserver.vercel.app' : "http://localhost:4000";
 
-// Prefixa host se a URL for relativa
+ 
 const withHost = (u) => {
   if (!u) return "";
   if (/^https?:\/\//i.test(u)) return u;
   return `${API_BASE}${u.startsWith("/") ? "" : "/"}${u}`;
 };
 
-// Texto seguro
+ 
 const safe = (s, fb = "") => (typeof s === "string" && s.trim() ? s.trim() : fb);
 
-// Divide um array em grupos de 3
+ 
 const chunk3 = (arr) => {
   const chunks = [];
   for (let i = 0; i < arr.length; i += 3) chunks.push(arr.slice(i, i + 3));
@@ -34,7 +34,7 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-  // Lightbox
+ 
   const [lbIndex, setLbIndex] = useState(-1);
   const isOpen = lbIndex >= 0;
 
@@ -71,7 +71,7 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
     fetchExamples();
   }, [fetchExamples]);
 
-  // Imagens para o lightbox (na mesma ordem de "items")
+ 
   const lightboxImages = useMemo(
     () =>
       items.map((it) => ({
@@ -81,28 +81,24 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
     [items]
   );
 
-  // Índices por layout fixo
+ 
   const idxLarge = 0;
   const idxDoubleA = 1;
   const idxDoubleB = 2;
   const idxVertical = 3;
 
-  // Restantes imagens depois das 4 primeiras (large + double(2) + vertical)
-  const rest = items.slice(4);
-
-  // Máximo de 3 grupos "tripple-box" => no máximo 9 imagens extra
+ 
+  const rest = items.slice(4); 
   const tripleChunks = useMemo(() => chunk3(rest).slice(0, 1), [rest]);
 
   return (
-    <aside>
-      {/* Estados simples */}
+    <aside> 
       {loading && <div>A carregar…</div>}
       {err && !loading && <div>⚠️ {err}</div>}
       {!loading && !err && !items.length && <div></div>}
 
       {!!items.length && (
-        <div className="gallery-wrapper">
-          {/* large-box (idx 0) */}
+        <div className="gallery-wrapper"> 
           {items[idxLarge] && (
             <div
               className="large-box box-img"
@@ -118,8 +114,7 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
               </div>
             </div>
           )}
-
-          {/* double-box (idx 1 e 2) */}
+ 
           {(items[idxDoubleA] || items[idxDoubleB]) && (
             <div className="double-box">
               {items[idxDoubleA] && (
@@ -154,8 +149,7 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
               )}
             </div>
           )}
-
-          {/* vertical-box (idx 3) */}
+ 
           {items[idxVertical] && (
             <div className="vertical-box">
               <div
@@ -173,12 +167,10 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
               </div>
             </div>
           )}
-
-          {/* tripple-box (até 3 grupos) */}
+ 
           {tripleChunks.map((chunk, cIdx) => (
             <div className="tripple-box" key={`tripple-${cIdx}`}>
-              {chunk.map((it, i) => {
-                // índice REAL no array items: 4 + deslocamento do grupo + posição no grupo
+              {chunk.map((it, i) => { 
                 const realIndex = 4 + cIdx * 3 + i;
                 return (
                   <div
@@ -201,8 +193,7 @@ function CategoryGridGalery({ categoryId = null, productId = null, productCode =
           ))}
         </div>
       )}
-
-      {/* Lightbox */}
+ 
       {isOpen && (
         <Lightbox
           images={items.map((it) => ({
