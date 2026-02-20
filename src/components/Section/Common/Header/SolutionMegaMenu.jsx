@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -220,44 +221,108 @@ export default function SolutionMegaMenu() {
   };
 
   useEffect(() => {
-    let alive = true;
+    let alive = true;   
 
-    (async () => {
-      setLoading(true);
-      try {
-        const areasRes = await fetchJson(`${API_BASE}/api/cms/application-areas`);
-        const areasRaw = Array.isArray(areasRes?.data) ? areasRes.data : [];
+ 
+const CACHE_KEY = "applicationAreasTiles_v1";
+const CACHE_TTL = 60 * 60 * 1000;  
 
-        const pagesRes = await fetchJson(`${API_BASE}/api/cms/area-pages`);
-        const pagesRaw = Array.isArray(pagesRes?.data) ? pagesRes.data : [];
+function loadCache() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
 
-        const pageByAreaId = new Map();
-        pagesRaw.forEach((p) => {
-          const aid = String(p?.wl_area?._id || p?.wl_area || "");
-          if (aid) pageByAreaId.set(aid, p);
-        });
+    const parsed = JSON.parse(raw);
+    if (!parsed?.timestamp || !Array.isArray(parsed?.data)) return null;
 
-        const merged = areasRaw.map((a) => {
-          const id = String(a?._id || "");
-          const label = String(
-            a?.wl_solution_title || a?.wl_title || a?.wl_name || "Área"
-          );
-          const page = pageByAreaId.get(id) || null;
-          const img = pickVerticalImgFromPage(page);
+    const isFresh = Date.now() - parsed.timestamp < CACHE_TTL;
+    return isFresh ? parsed.data : null;
+  } catch {
+    return null;
+  }
+}
 
-          return { id, label, image: img || "", page, rawArea: a };
-        });
+function saveCache(data) {
+  try {
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify({ timestamp: Date.now(), data })
+    );
+  } catch { 
+  }
+}
 
-        const safe = merged.filter((x) => x.id);
-        if (alive) setTiles(safe);
-      } catch (e) {
-        console.clear();
-        console.log("error = ", e);
-        if (alive) setTiles([]);
-      } finally {
-        if (alive) setLoading(false);
-      }
-    })();
+(async () => {
+  setLoading(true);
+ 
+  const cached = loadCache();
+  if (cached && alive) {
+    setTiles(cached);
+    setLoading(false);
+    return;  
+  }
+ 
+  try {
+    const areasRes = await fetchJson(`${API_BASE}/api/cms/application-areas`);
+    const areasRaw = Array.isArray(areasRes?.data) ? areasRes.data : [];
+
+    const pagesRes = await fetchJson(`${API_BASE}/api/cms/area-pages`);
+    const pagesRaw = Array.isArray(pagesRes?.data) ? pagesRes.data : [];
+
+    const pageByAreaId = new Map();
+    pagesRaw.forEach((p) => {
+      const aid = String(p?.wl_area?._id || p?.wl_area || "");
+      if (aid) pageByAreaId.set(aid, p);
+    });
+
+    const merged = areasRaw.map((a) => {
+      const id = String(a?._id || "");
+      const label = String(
+        a?.wl_solution_title || a?.wl_title || a?.wl_name || "Área"
+      );
+      const page = pageByAreaId.get(id) || null;
+      const img = pickVerticalImgFromPage(page);
+
+      return { id, label, image: img || "", page, rawArea: a };
+    });
+
+    const safe = merged.filter((x) => x.id); 
+    saveCache(safe);
+
+    if (alive) setTiles(safe);
+  } catch (e) {
+    console.clear();
+    console.log("error = ", e);
+    if (alive) setTiles([]);
+  } finally {
+    if (alive) setLoading(false);
+  }
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return () => {
       alive = false;
@@ -298,10 +363,10 @@ export default function SolutionMegaMenu() {
   const getTargetFullSlides = () => {
     if (!isBrowser) return 4;
     const w = window.innerWidth;
-    if (w >= 1400) return 5; // 5.5
-    if (w >= 1200) return 4; // 4.5
-    if (w >= 900) return 3; // 3.5
-    return 2; // 2.5
+    if (w >= 1400) return 5; 
+    if (w >= 1200) return 4; 
+    if (w >= 900) return 3; 
+    return 2; 
   };
 
   const recomputeCardWidth = () => {

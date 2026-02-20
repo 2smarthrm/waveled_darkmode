@@ -41,6 +41,91 @@ export default function ProductMegaMenu() {
     return data;
   }
 
+  // =========================
+  // LocalStorage cache (cross-browser safe)
+  // =========================
+  // Se passar este tempo, volta a ir à API em vez do localStorage
+  const CACHE_REVALIDATE_MS = 60 * 60 * 1000; // 1 hora (ajusta aqui)
+  // Atualização “forçada” em background (mantém cache fresco)
+  const CACHE_BACKGROUND_REFRESH_MS = 2 * 60 * 60 * 1000; // 2 horas (ajusta aqui)
+
+  const memoryCacheRef = useRef(Object.create(null));
+
+  function hasLocalStorage() {
+    if (!isBrowser) return false;
+    try {
+      const k = "__wl_ls_test__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function safeParseJSON(s) {
+    try {
+      return JSON.parse(s);
+    } catch {
+      return null;
+    }
+  }
+
+  function readCache(key) {
+    // localStorage preferido; fallback para memória (caso private mode / bloqueios)
+    const now = Date.now();
+    const lsOk = hasLocalStorage();
+
+    if (lsOk) {
+      const raw = window.localStorage.getItem(key);
+      if (!raw) return { hit: false };
+      const parsed = safeParseJSON(raw);
+      if (!parsed || typeof parsed !== "object") return { hit: false };
+
+      const ts = Number(parsed.ts || 0);
+      const age = now - ts;
+      return {
+        hit: true,
+        fresh: age <= CACHE_REVALIDATE_MS,
+        ts,
+        data: parsed.data,
+      };
+    }
+
+    const mem = memoryCacheRef.current[key];
+    if (!mem) return { hit: false };
+    const ts = Number(mem.ts || 0);
+    const age = now - ts;
+    return { hit: true, fresh: age <= CACHE_REVALIDATE_MS, ts, data: mem.data };
+  }
+
+  function writeCache(key, data) {
+    const payload = { ts: Date.now(), data };
+    const lsOk = hasLocalStorage();
+    if (lsOk) {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(payload));
+        return;
+      } catch {
+        // fallback abaixo
+      }
+    }
+    memoryCacheRef.current[key] = payload;
+  }
+
+  async function getCachedOrFetch({ key, url }) {
+    const cached = readCache(key);
+    if (cached.hit && cached.fresh) {
+      return { data: cached.data, fromCache: true };
+    }
+    const fresh = await fetchJson(url);
+    writeCache(key, fresh);
+    return { data: fresh, fromCache: false };
+  }
+
+  // =========================
+  // Menu open/close stuff (mantido)
+  // =========================
   const [open, setOpen] = useState(false);
   const triggerRef = useRef(null);
   const menuRef = useRef(null);
@@ -135,19 +220,22 @@ export default function ProductMegaMenu() {
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
- 
+  // =========================
+  // Slider (com cache)
+  // =========================
   const [sliderItems, setSliderItems] = useState([]);
   const [sliderLoading, setSliderLoading] = useState(false);
 
   useEffect(() => {
     let alive = true;
 
-    async function loadSlider() {
-      setSliderLoading(true);
+    const CACHE_KEY = "wl_cache_vertical_solutions_featured_1";
+
+    async function loadSlider({ background = false } = {}) {
+      if (!background) setSliderLoading(true);
       try {
-        const data = await fetchJson(
-          `${API_BASE}/api/cms/vertical-solutions?featured=1`
-        );
+        const url = `${API_BASE}/api/cms/vertical-solutions?featured=1`;
+        const { data } = await getCachedOrFetch({ key: CACHE_KEY, url });
 
         const list = (data?.data || []).map((x) => ({
           title: x?.wl_title || "Solução",
@@ -158,15 +246,25 @@ export default function ProductMegaMenu() {
 
         if (alive) setSliderItems(list);
       } catch {
-        if (alive) setSliderItems([]);
+        if (alive && !background) setSliderItems([]);
       } finally {
-        if (alive) setSliderLoading(false);
+        if (alive && !background) setSliderLoading(false);
       }
     }
 
     loadSlider();
+
+    // refresh em background a cada 2h (mantém cache atualizado)
+    let t = null;
+    if (isBrowser) {
+      t = setInterval(() => {
+        loadSlider({ background: true }).catch(() => {});
+      }, CACHE_BACKGROUND_REFRESH_MS);
+    }
+
     return () => {
       alive = false;
+      if (t) clearInterval(t);
     };
   }, [API_BASE]);
 
@@ -203,7 +301,7 @@ export default function ProductMegaMenu() {
       if (e.key === "ArrowRight") next();
     }
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey); 
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
   const current =
@@ -214,7 +312,9 @@ export default function ProductMegaMenu() {
       id: "",
     };
 
- 
+  // =========================
+  // Tabs/Categorias (com cache)
+  // =========================
   const [tabs, setTabs] = useState([]);
   const [tabsLoading, setTabsLoading] = useState(false);
 
@@ -225,12 +325,15 @@ export default function ProductMegaMenu() {
   useEffect(() => {
     let alive = true;
 
-    async function loadCategoriesWithSubs() {
-      setTabsLoading(true);
+    const CACHE_KEY = "wl_cache_categories_with_subcategories";
+
+    async function loadCategoriesWithSubs({ background = false } = {}) {
+      if (!background) setTabsLoading(true);
       try {
-        const data = await fetchJson(
-          `${API_BASE}/api/categories-with-subcategories?_ts=${Date.now()}`
-        );
+        // Mantive o _ts para evitar caches intermediárias do servidor/proxy,
+        // mas agora o “cache rápido” é o localStorage do browser.
+        const url = `${API_BASE}/api/categories-with-subcategories?_ts=${Date.now()}`;
+        const { data } = await getCachedOrFetch({ key: CACHE_KEY, url });
 
         const list = data?.data || [];
         const arr = Array.isArray(list)
@@ -259,19 +362,28 @@ export default function ProductMegaMenu() {
           setActiveCategoryId("");
         }
       } catch {
-        if (alive) {
+        if (alive && !background) {
           setTabs([]);
           setActiveTabKey("");
           setActiveCategoryId("");
         }
       } finally {
-        if (alive) setTabsLoading(false);
+        if (alive && !background) setTabsLoading(false);
       }
     }
 
     loadCategoriesWithSubs();
+
+    let t = null;
+    if (isBrowser) {
+      t = setInterval(() => {
+        loadCategoriesWithSubs({ background: true }).catch(() => {});
+      }, CACHE_BACKGROUND_REFRESH_MS);
+    }
+
     return () => {
       alive = false;
+      if (t) clearInterval(t);
     };
   }, [API_BASE]);
 
@@ -286,7 +398,9 @@ export default function ProductMegaMenu() {
     );
   }, [activeCategory]);
 
-  
+  // =========================
+  // Produtos (com cache por combinação categoria/subcategoria)
+  // =========================
   const [products, setProducts] = useState([]);
   const [productsLoading, setProductsLoading] = useState(false);
 
@@ -294,8 +408,8 @@ export default function ProductMegaMenu() {
     let alive = true;
     if (!activeCategoryId) return;
 
-    async function loadProductsByCategory() {
-      setProductsLoading(true);
+    async function loadProductsByCategory({ background = false } = {}) {
+      if (!background) setProductsLoading(true);
       try {
         const params = new URLSearchParams();
         params.set("category", activeCategoryId);
@@ -305,25 +419,39 @@ export default function ProductMegaMenu() {
         }
 
         const url = `${API_BASE}/api/products?${params.toString()}`;
-        const data = await fetchJson(url);
+        const cacheKey = `wl_cache_products_${activeCategoryId}_${activeSubId || "all"}`;
+
+        const { data } = await getCachedOrFetch({ key: cacheKey, url });
         if (alive) setProducts(data?.data || []);
       } catch {
-        if (alive) setProducts([]);
+        if (alive && !background) setProducts([]);
       } finally {
-        if (alive) setProductsLoading(false);
+        if (alive && !background) setProductsLoading(false);
       }
     }
 
     loadProductsByCategory();
+
+    // background refresh a cada 2h também (para a seleção atual)
+    let t = null;
+    if (isBrowser) {
+      t = setInterval(() => {
+        loadProductsByCategory({ background: true }).catch(() => {});
+      }, CACHE_BACKGROUND_REFRESH_MS);
+    }
+
     return () => {
       alive = false;
+      if (t) clearInterval(t);
     };
   }, [API_BASE, activeCategoryId, activeSubId]);
 
   const productWrapperRef = useRef(null);
   const autoExpandRef = useRef(false);
 
- 
+  // =========================
+  // Tabs scroller (mantido)
+  // =========================
   const tabsScrollerRef = useRef(null);
   const [tabsOverflow, setTabsOverflow] = useState(false);
   const [tabsAtLeft, setTabsAtLeft] = useState(true);
@@ -364,7 +492,7 @@ export default function ProductMegaMenu() {
   }
 
   // =========================
-  // Visible products + see more
+  // Visible products + see more (mantido)
   // =========================
   const [initialCount, setInitialCount] = useState(6);
   const [showAll, setShowAll] = useState(false);
@@ -424,8 +552,7 @@ export default function ProductMegaMenu() {
         if (!bottom) setWasAtBottomByButton(false);
 
         if (!showAll && overflow) {
-          const nearBottom =
-            el.scrollTop + el.clientHeight >= el.scrollHeight - 48;
+          const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 48;
           if (nearBottom && !autoExpandRef.current) {
             autoExpandRef.current = true;
             setShowAll(true);
@@ -485,7 +612,7 @@ export default function ProductMegaMenu() {
     }, 420);
   }
 
-  // prevent page scroll while inside products list
+  // prevent page scroll while inside products list (mantido)
   useEffect(() => {
     const el = productWrapperRef.current;
     if (!el) return;
@@ -540,6 +667,7 @@ export default function ProductMegaMenu() {
     (products && products.length > 0) ||
     (sliderItems && sliderItems.length > 0);
 
+    
   return (
     <div className="wl-mega-root">
       <div
