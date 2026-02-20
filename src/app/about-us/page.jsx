@@ -8,7 +8,7 @@ import Link from "next/link";
 import { FiCheckCircle } from "react-icons/fi";
 
 export const metadata = {
-  title: "Sobre nós",
+  title: "Sobre nós ",
 }; 
 
 const Aboutpage = () => {
@@ -19,7 +19,6 @@ const Aboutpage = () => {
       <br />
       <br />
 
-      {/* 1 - hero */}
       <section className="about-hero abt-st">
         <div className="about-over">
           <div className="content">
@@ -40,7 +39,7 @@ const Aboutpage = () => {
         </div>
       </section>
 
-      {/* 2 - descrição */}
+      
       <section className="about-description">
         <div className="container">
           <div className="text-area">
@@ -77,14 +76,11 @@ const Aboutpage = () => {
           </div>
         </div>
       </section>
-
       <br />
-      <br />
-
-      {/* 3 - Detalhes + Visão no meio */}
+      <br />  
       <section className="about-info abt-st">
         <div className="container">
-          {/* Block 1 - Missão */}
+    
           <div className="block-data">
             <div className="text">
               <h2>A nossa missão</h2>
@@ -113,7 +109,7 @@ const Aboutpage = () => {
        </div>
           <br />
           <br /> 
-          {/* Área do meio - Visão  */}
+ 
           <div className="about-info-section dt-st">
              <div className="container">
                <div className="section-title mb-40">
@@ -155,7 +151,7 @@ const Aboutpage = () => {
 
           <br />
           <br />
-          {/* Block 2 - Assistência */}
+      
        <div className="container"> 
           <div className="block-data rev">
             <div className="text">

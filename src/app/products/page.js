@@ -51,48 +51,122 @@ export default function ServicePage() {
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 12;
 
-  // Load all once
-  useEffect(() => {
-    let alive = true;
+   
+useEffect(() => {
+  let alive = true; 
+  const CACHE_REVALIDATE_MS = 60 * 60 * 1000;  
+  const CACHE_KEY = "wl_cache_cats_and_products_v1";
 
-    (async () => {
-      setLoading(true);
-      setErr("");
-      try {
-        const [catRes, prodRes] = await Promise.all([
-          fetchJson(`${API_BASE}/api/categories-with-subcategories?_ts=${Date.now()}`),
-          fetchJson(`${API_BASE}/api/products?_ts=${Date.now()}`),
-        ]);
+  const hasLocalStorage = () => {
+    try {
+      if (typeof window === "undefined") return false;
+      const k = "__wl_ls_test__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch {
+      return false;
+    }
+  };
 
-        const catList = Array.isArray(catRes?.data) ? catRes.data : [];
-        const mappedCats = catList
-          .map((c) => ({
-            id: String(c?._id),
-            label: String(c?.wl_name || "Categoria"),
-            wl_order: typeof c?.wl_order === "number" ? c.wl_order : 0,
-            subcategories: Array.isArray(c?.subcategories) ? c.subcategories : [],
-          }))
-          .sort((a, b) => (a.wl_order || 0) - (b.wl_order || 0));
+  const safeParseJSON = (s) => {
+    try {
+      return JSON.parse(s);
+    } catch {
+      return null;
+    }
+  };
 
-        const productsList = Array.isArray(prodRes?.data) ? prodRes.data : [];
+  const readCache = () => {
+    if (!hasLocalStorage()) return { hit: false };
+    const raw = window.localStorage.getItem(CACHE_KEY);
+    if (!raw) return { hit: false };
 
-        if (!alive) return;
-        setCats(mappedCats);
-        setAllProducts(productsList);
-      } catch (e) {
-        if (!alive) return;
-        setErr(e?.message || "Erro ao carregar produtos.");
-        setCats([]);
-        setAllProducts([]);
-      } finally {
-        if (alive) setLoading(false);
-      }
-    })();
+    const parsed = safeParseJSON(raw);
+    if (!parsed || typeof parsed !== "object") return { hit: false };
 
-    return () => {
-      alive = false;
+    const ts = Number(parsed.ts || 0);
+    const age = Date.now() - ts;
+
+    return {
+      hit: true,
+      fresh: age <= CACHE_REVALIDATE_MS,
+      data: parsed.data,
     };
-  }, []);
+  };
+
+  const writeCache = (data) => {
+    if (!hasLocalStorage()) return;
+    try {
+      window.localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({ ts: Date.now(), data })
+      );
+    } catch { 
+    }
+  };
+
+  (async () => {
+    setLoading(true);
+    setErr("");
+
+    try { 
+      const cached = readCache();
+      if (cached.hit && cached.fresh) {
+        const cachedCats = cached?.data?.cats;
+        const cachedProducts = cached?.data?.products;
+
+        const okCats = Array.isArray(cachedCats) ? cachedCats : [];
+        const okProducts = Array.isArray(cachedProducts) ? cachedProducts : [];
+
+        if (alive) {
+          setCats(okCats);
+          setAllProducts(okProducts);
+          setLoading(false);
+        }
+        return;
+      }
+ 
+      const [catRes, prodRes] = await Promise.all([
+        fetchJson(
+          `${API_BASE}/api/categories-with-subcategories?_ts=${Date.now()}`
+        ),
+        fetchJson(`${API_BASE}/api/products?_ts=${Date.now()}`),
+      ]);
+
+      const catList = Array.isArray(catRes?.data) ? catRes.data : [];
+      const mappedCats = catList
+        .map((c) => ({
+          id: String(c?._id),
+          label: String(c?.wl_name || "Categoria"),
+          wl_order: typeof c?.wl_order === "number" ? c.wl_order : 0,
+          subcategories: Array.isArray(c?.subcategories) ? c.subcategories : [],
+        }))
+        .sort((a, b) => (a.wl_order || 0) - (b.wl_order || 0));
+
+      const productsList = Array.isArray(prodRes?.data) ? prodRes.data : [];
+ 
+      writeCache({ cats: mappedCats, products: productsList });
+
+      if (!alive) return;
+      setCats(mappedCats);
+      setAllProducts(productsList);
+    } catch (e) {
+      if (!alive) return;
+      setErr(e?.message || "Erro ao carregar produtos.");
+      setCats([]);
+      setAllProducts([]);
+    } finally {
+      if (alive) setLoading(false);
+    }
+  })();
+
+  return () => {
+    alive = false;
+  };
+}, []);
+
+
 
   const activeCategory = useMemo(() => {
     if (categoryId === ALL) return null;
@@ -184,8 +258,6 @@ export default function ServicePage() {
       <br />
       <br />
       <br />
-      <br />
-      <br />
       <br /> 
 
       <div className="product-area">
@@ -250,7 +322,7 @@ export default function ServicePage() {
               </div>
             </div>
           </div>
-          <br/><br/>
+          <br/> 
 
           {/* Grid */}
           <div className="row">

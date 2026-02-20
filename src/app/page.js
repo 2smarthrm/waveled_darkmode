@@ -1,9 +1,9 @@
+// problrma ao clcikar. nos dost do sldier nao faz nada e ao etnaramso afzer tambem o swipe no sldier tambem nao afz nada resolevr isoso e. devolevr fullcode do meu file em .js
 "use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
-
 import AccordionSection from "~/components/Section/Home-4/AccordionSection";
 import HeroSection from "~/components/Section/Home-4/HeroSection";
 import ItSolutionSection from "~/components/Section/Home-4/ItSolutionSection";
@@ -13,12 +13,11 @@ import RecentProjectsSection from "~/components/Section/Home-4/RecentProjectsSec
 import HeaderFour from "~/components/Section/Common/Header/HeaderFour";
 import FooterFour from "~/components/Section/Common/FooterFour";
 import CtaThreeSection from "~/components/Section/Common/CtaThree/CtaThreeSection";
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// --------- ENV ---------
+ 
 const isBrowser = typeof window !== "undefined";
 const protocol = 
   isBrowser && window.location.protocol === "https:" ? "https" : "http";
@@ -31,7 +30,7 @@ const IMG_HOST =
     ? "https://waveledserver.vercel.app"
     : "http://localhost:4000";
 
-// --------- Helpers ---------
+ 
 const isAbsoluteUrl = (u) => typeof u === "string" && /^https?:\/\//i.test(u);
 const withHost = (u) => (u ? (isAbsoluteUrl(u) ? u : `${IMG_HOST}${u}`) : "");
 const safeText = (s, fb = "") => (typeof s === "string" && s.trim() ? s : fb);
@@ -51,7 +50,7 @@ const isMobileUA = () => {
   );
 };
 
-// Ordena: primeiro por mais antigas (ASC), depois acrescenta as mais recentes (DESC) sem duplicar
+ 
 const orderFirstOldestThenNewest = (arr) => {
   const items = Array.isArray(arr) ? arr.slice() : [];
   const getTime = (x) => {
@@ -81,16 +80,16 @@ function repeatToMin(items, minCount) {
 
   const out = [];
   while (out.length < minCount) out.push(...src);
-  return out.slice(0, minCount);
+  return out.slice(0, minCount); 
 }
 
-// --------- Axios client ---------
+ 
 const api = axios.create({
   baseURL: API_BASE,
   timeout: 15000,
 });
 
-// --------- Skeleton Card (shimmer) ---------
+ 
 const SkeletonCard = () => (
   <div className="card-slider-vertical" aria-hidden="true">
     <article className="card-inner skeleton-card-vertical">
@@ -132,11 +131,7 @@ function CardSliderVertical({ item }) {
                 <button className="bg-primary text-light">Saiba mais</button>
               </Link>
             ) : (
-              <button
-                className="bg-primary text-light"
-                disabled
-                style={{ opacity: 0.6 }}
-              >
+              <button className="bg-primary text-light" disabled style={{ opacity: 0.6 }}  >
                 Saiba mais
               </button>
             )}
@@ -199,10 +194,8 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
     const listEl = inner?.list;
     const track = listEl?.querySelector?.(".slick-track");
 
-    if (track && isFrozenRef.current) {
-      // Restaura a transition original (react-slick volta a controlar)
-      const prev = trackTransitionRef.current || "";
-      // 2 frames ajudam a evitar "pulo" quando volta a animar
+    if (track && isFrozenRef.current) { 
+      const prev = trackTransitionRef.current || ""; 
       requestAnimationFrame(() => {
         track.style.transition = prev;
         requestAnimationFrame(() => {
@@ -216,9 +209,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
     isFrozenRef.current = false;
   };
 
-  // ==========================
-  // FETCH: Favoritos do CMS
-  // ==========================
+ 
   useEffect(() => {
     const ac = new AbortController();
 
@@ -266,9 +257,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
     return () => ac.abort();
   }, []);
 
-  // ==========================
-  // FETCH: /api/solutions
-  // ==========================
+ 
   useEffect(() => {
     const ac = new AbortController();
 
@@ -302,7 +291,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
     return () => ac.abort();
   }, []);
 
-  // memo para render rápido (mantido)
+ 
   const cards = useMemo(() => {
     return (solutions || []).map((item) => {
       const id = String(item?._id || "");
@@ -313,9 +302,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
     });
   }, [solutions]);
 
-  // ==========================
-  // Autoplay smooth + infinite sem “buracos”
-  // ==========================
+ 
   const verticalBaseCount = VerticalSolutionsItems.length;
 
   const verticalForLoop = useMemo(() => {
@@ -327,8 +314,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
   const shouldAutoplay =
     deviceType !== "mobile" && shouldInfinite && verticalBaseCount > 4;
 
-  // IMPORTANTE:
-  // - pauseOnHover fica FALSE e fazemos pause "hard" com freeze/restore
+ 
   const VerticalSliderSettings = useMemo(
     () => ({
       dots: true,
@@ -339,8 +325,8 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
       speed: 9000,
       cssEase: "linear",
 
-      pauseOnHover: false, // <<< FIX
-      pauseOnFocus: false, // <<< FIX
+      pauseOnHover: false,  
+      pauseOnFocus: false, 
 
       swipeToSlide: true,
       touchMove: true,
@@ -444,8 +430,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
               aria-live="polite"
               aria-busy={verticalLoading ? "true" : "false"}
             >
-              <aside className="card-slides-vertical">
-                {/* Wrapper para pause imediato */}
+              <aside className="card-slides-vertical"> 
                 <div
                   className="slick-pause-hard"
                   onMouseEnter={freezeSlickTrackNow}
@@ -503,7 +488,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
       <FooterFour />
 
       <style jsx>{`
-        /* Skeleton base */
+       
         .skeleton-box {
           position: relative;
           overflow: hidden;
@@ -527,8 +512,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
             transform: translateX(100%);
           }
         }
-
-        /* Skeleton vertical */
+ 
         .skeleton-card-vertical .image {
           border-radius: 14px;
           overflow: hidden;
@@ -545,13 +529,13 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           background: #f8f9fb;
         }
 
-        /* Dá um alvo de hover/focus consistente */
+       
         .slick-pause-hard {
           outline: none;
         }
       `}</style>
 
-      {/* Ajustes globais para o react-slick ficar realmente “smooth” */}
+       
       <style jsx global>{`
         .card-slides-vertical .slick-track {
           display: flex !important;
@@ -565,10 +549,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           overflow: hidden;
         }
 
-        /* FORCE DOTS VISIBLE:
-           - reset any transparent/overridden rules
-           - replace default pseudo-dot with a solid button so it's always visible
-        */
+ 
         .card-slides-vertical .slick-dots {
           position: relative;
           bottom: 8px; /* bring dots into view */
@@ -586,7 +567,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           list-style: none;
         }
 
-        /* hide default pseudo and render our own circular button */
+      
         .card-slides-vertical .slick-dots li button {
           width: 12px;
           height: 12px;
@@ -599,7 +580,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           -webkit-appearance: none;
         }
 
-        /* remove default :before visual (some themes set it) */
+       
         .card-slides-vertical .slick-dots li button:before {
           content: '';
           display: none;
@@ -611,8 +592,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           background: rgba(255, 255, 255, 0.98);
           transform: scale(1.02);
         }
-
-        /* small responsive tweak */
+ 
         @media (max-width: 768px) {
           .card-slides-vertical .slick-dots {
             bottom: 6px;
@@ -626,7 +606,7 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           }
         }
 
-        /* ensure dots aren't clipped by overflow on parent containers */
+ 
         .card-slides-vertical,
         .card-slides-vertical .slick-list,
         .card-slides-vertical .slick-slider {

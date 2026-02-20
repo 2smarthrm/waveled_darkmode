@@ -28,8 +28,7 @@ export default function RootLayout({ children }) {
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 200); // Adjust the loading duration as needed
-
+    }, 200); 
     return () => clearTimeout(timer);
   }, [pathname]);
 
@@ -54,8 +53,7 @@ export default function RootLayout({ children }) {
               <link key={index} rel="shortcut icon" href={shortcutIcon} />
             ))}
           </React.Fragment>
-        )} 
-
+          )}  
           <Script
           dangerouslySetInnerHTML={{
             __html: `
@@ -81,9 +79,7 @@ export default function RootLayout({ children }) {
         <Loading isLoading={isLoading} />
         <SwitchMode />
         {!isLoading && children}
-      </body>
-
-
+      </body> 
     </html>
   );
 }

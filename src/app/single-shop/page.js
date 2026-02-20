@@ -7,7 +7,6 @@ const SinglePage = () => {
   return (
     <>
       <HeaderFour className="tekup-header-top bg-light1 " /> 
-              <title>produtos</title>
       <br/> <br/> <br/>
       <SingleShopSection />
       <FooterFour className="tekup-footer-section dark-bg" />
