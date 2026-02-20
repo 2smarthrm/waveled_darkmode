@@ -3100,11 +3100,17 @@ body .card-slides-vertical .card-slider-vertical {
 
 
 body .card-slides-vertical .card-slider-vertical .card-inner {
-  height: 700px;
+  height: 600px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
 }
+
+
+body .categorie-page  article {
+  padding: 15px; 
+}
+
 
 
 body .card-slides-vertical .card-slider-vertical .card-inner .over-image {
@@ -3235,16 +3241,17 @@ body .categorie-page .categorie-five-sliders .space-div p {
   color: #6b7280 !important;
   max-width: 850px;
 }
+ 
 
-body .categorie-page  article {
-  padding: 15px;
-  height:max-content !important;
-  min-height:400px !important;
+body .card-slides-vertical .card-slider-vertical .card-inner{
+  padding:0px !important;
 }
+
+ 
 
 body .categorie-page .categorie-five-sliders article .inner-item {
   width: 100%;
-  height: 500px;
+  height:700px; 
   display: flex;
   flex-direction: column;
 }
@@ -3252,7 +3259,7 @@ body .categorie-page .categorie-five-sliders article .inner-item {
 body .categorie-page .categorie-five-sliders article img {
   width: 100%;
   height: 100%;
-  height: 350px;
+  height: 450px;
   object-fit: cover;
 }
 
@@ -3262,7 +3269,7 @@ body .categorie-page .categorie-five-sliders article strong {
 }
 
 body .categorie-page .categorie-five-sliders  .slick-list{
- height:580px !important; 
+ height:650px !important; 
 }
 
 body .categorie-page .categorie-five-sliders article button {
@@ -3496,6 +3503,7 @@ body .see-more-btn {
   cursor: pointer !important;
 }
 
+ 
 body .site-header .wl-wrap article a small {
   color: #000 !important;
 }
@@ -4363,6 +4371,8 @@ body.dark-wave{
   color:#cfcfcf;
 }
 
+
+body.dark-wave .wl-mega-inner .content-slide .sm-text,
 body.dark-wave .top-product-card .over-card h3,
 body.dark-wave .top-product-card .over-card p{
   color:#0D152E !important;
