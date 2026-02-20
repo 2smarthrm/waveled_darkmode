@@ -21,7 +21,7 @@ function FiveSolutionsSlider({ items }) {
     initialSlide: 0,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true, dots: true } },
-      { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 1 } },
+      { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 1 }},
       { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
     ],
   };
@@ -32,12 +32,12 @@ function FiveSolutionsSlider({ items }) {
         <div className="space-div">
           <div>
             <h3 className="text-light">Soluções pensadas para atrair clientes</h3>
-          </div>
-          <div>
+            <div>
             <p>
               Soluções que transformam espaços, captam atenção e comunicam a sua marca com impacto, inovação e máxima
               qualidade visual.
             </p>
+          </div>
           </div>
         </div> 
         <Slider {...Settings}>
@@ -111,6 +111,7 @@ function HeaderAreaAndTitle({ title, areas, active }) {
       <div className="category-page-title">
         <h3>Soluções que transformam espaços.</h3>
         <h6 className="text-secondary">soluções para - {title}</h6>
+        <br />
       </div>
       <hr />
       <div className="category-page-cats">
@@ -386,103 +387,35 @@ export default function ShopSection() {
     return "#";
   }
 
+  useEffect(() => {
+    const load = async () => {
+      setLoading(true);
+      setErrorMsg("");
 
+      try {
+        const areasRes = await axios.get(API_BASE + `/api/cms/application-areas`);
+        setAreas(areasRes.data?.data || []);
+        if (!areaId) {
+          setPage(null);
+          return;
+        }
 
-  const CACHE_KEY = "areaPageCache_v1";
-const CACHE_TTL = 60 * 60 * 1000; // 1 hora
-
-function loadCache(areaId) {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-
-    const parsed = JSON.parse(raw);
-    if (!parsed?.timestamp || !parsed?.data) return null;
-
-    const isFresh = Date.now() - parsed.timestamp < CACHE_TTL;
-    if (!isFresh) return null;
-
-    return parsed.data[areaId] || null;
-  } catch {
-    return null;
-  }
-}
-
-function saveCache(areaId, data) {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    const parsed = raw ? JSON.parse(raw) : { data: {} };
-
-    parsed.timestamp = Date.now();
-    parsed.data[areaId] = data;
-
-    localStorage.setItem(CACHE_KEY, JSON.stringify(parsed));
-  } catch {}
-}
-
-useEffect(() => {
-  const load = async () => {
-    setLoading(true);
-    setErrorMsg("");
- 
-    const cached = loadCache(areaId);
-    if (cached) {
-      setAreas(cached.areas);
-      setPage(cached.page);
-      setLoading(false);
-      return;
-    }
- 
-    try {
-      const areasRes = await axios.get(
-        API_BASE + `/api/cms/application-areas`
-      );
-
-      const areas = areasRes.data?.data || [];
-      setAreas(areas);
-
-      if (!areaId) {
+        const pageRes = await axios.get(API_BASE + `/api/cms/area-pages/${areaId}`);
+        setPage(pageRes.data?.data || null);
+      } catch (e) {
         setPage(null);
+        setTimeout(() => {
+          console.clear();
+          console.error("Erro ao carregar área", e);
+          setErrorMsg("Não foi possível carregar esta área. Tenta novamente.");
+        }, 500);
+      } finally {
         setLoading(false);
-        return;
       }
+    };
 
-      const pageRes = await axios.get(
-        API_BASE + `/api/cms/area-pages/${areaId}`
-      );
-
-      const page = pageRes.data?.data || null;
-      setPage(page);
- 
-      saveCache(areaId, { areas, page });
-
-    } catch (e) {
-      setPage(null);
-
-      setTimeout(() => {
-        console.clear();
-        console.error("Erro ao carregar área", e);
-        setErrorMsg(
-          "Não foi possível carregar esta área. Tenta novamente."
-        );
-      }, 500);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  load();
-}, [areaId, API_BASE]);
-
-
-
-
- 
-
-
-
-
-
+    load();
+  }, [areaId, API_BASE]);
 
   if (loading) {
     return (
@@ -717,3 +650,22 @@ useEffect(() => {
   );
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
