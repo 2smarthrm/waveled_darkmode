@@ -335,12 +335,12 @@ export default function FooterFore(props) {
                       <div className="icon" />
                       <span style={mutedStyle}>Tel: +351 210 353 555</span>
                       <br />
-                      <span style={{ marginLeft: "40px", ...mutedStyle }}>
+                      <span style={{ marginLeft: "25px", ...mutedStyle }}>
                         +351 212 456 082
                       </span>
                       <br />
-                      <small style={{ fontSize: "14px", color: "#2563eb" }}>
-                        Chamada para a Rede Fixa Nacional
+                      <small style={{ fontSize: "12px", color: "#2563eb" }}>
+                        (Chamada para a Rede Fixa Nacional)
                       </small>
                     </li>
                   </ul>
