@@ -1,249 +1,202 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import Slider from "react-slick";
 import axios from "axios";
 
+ 
+
 export default function ServiceSection() {
-  const videoRefs = useRef([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(null);
+  const [error, setError] = useState("");
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    arrows: true,
-    slidesToShow: 3.1,
-    slidesToScroll: 3.1,
-    responsive: [
-      {
-        breakpoint: 1050,
-        settings: {
-          slidesToShow: 1.0,
-          slidesToScroll: 1.0,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
-  useEffect(() => {
-    const isVisible = (el) => el?.dataset?.visible === "true";
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          video.dataset.visible = entry.isIntersecting ? "true" : "false";
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.35 },
-    );
-
-    const handleEnded = (e) => {
-      const v = e.currentTarget;
-      if (isVisible(v)) {
-        try {
-          v.currentTime = 0;
-        } catch {}
-        v.play().catch(() => {});
-      }
-    };
-
-    const handleVisibilityChange = () => {
-      videoRefs.current.forEach((v) => {
-        if (!v) return;
-        if (document.hidden) {
-          v.pause();
-        } else if (isVisible(v)) {
-          v.play().catch(() => {});
-        }
-      });
-    };
-
-    videoRefs.current.forEach((v) => {
-      if (!v) return;
-      v.dataset.visible = "false";
-      observer.observe(v);
-      v.addEventListener("ended", handleEnded);
-    });
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      videoRefs.current.forEach((v) => {
-        if (!v) return;
-        observer.unobserve(v);
-        v.removeEventListener("ended", handleEnded);
-      });
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
-
-  const Sections = [
-    {
-      video: "https://ik.imagekit.io/fsobpyaa5i/image-gen%20(83).png",
-      title: "Planeamento",
-      reverse: false,
-      description:
-        "Transformamos objetivos em especificações técnicas: levantamento de espaço, simulação de visibilidade, cálculo de pitch e luminosidade, cronograma e logística. Para eventos (feiras, congressos, ativações) entregamos aluguer chave-na-mão com transporte, montagem, calibração e operação no local — alta resolução, brilho consistente e prazos cumpridos, sem dores de cabeça.",
-      image:
-        "https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg",
-      over_text: {
-        text_1: "Planeamos para impressionar",
-        text_2: "Estudo • Simulação • execução",
-      },
-    },
-    {
-      video:
-        "https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-01-12T154552.830.jpg",
-      title: "Implementação",
-      reverse: true,
-      description:
-        "Projetamos e instalamos displays LED para retalho, showrooms, auditórios, centros comerciais e fachadas. Indoor de alta definição, outdoor com proteção climática e soluções transparentes para vitrines — tudo integrado com CMS simples, eficiência energética e acabamentos que respeitam a identidade da marca. Entrega “pronta a usar”, segura e fiável.",
-      image:
-        "https://images.pexels.com/photos/6958531/pexels-photo-6958531.jpeg",
-      over_text: {
-        text_1: "Impacto visual sem limites",
-        text_2: "Indoor • Outdoor • Transparente",
-      },
-    },
-    {
-      video: "https://ik.imagekit.io/fsobpyaa5i/image-gen%20(86).png",
-      title: "Assistência Técnica",
-      reverse: false,
-      description:
-        "Acompanhamos do primeiro dia ao dia-a-dia: auditoria técnica, manutenção preventiva e corretiva, atualizações de firmware, calibração de cor e formação de equipas. Suporte remoto e on-site, SLAs claros e stock de peças críticas para maximizar o tempo de atividade e a longevidade do investimento.",
-      image:
-        "https://images.pexels.com/photos/7682087/pexels-photo-7682087.jpeg",
-      over_text: {
-        text_1: "Assistência sempre disponível  ",
-        text_2: "Suporte remoto e no local",
-      },
-    },
-     {
-      video: "https://www.ledwallcentral.com/images/mfg/unilumin-thumb-1.jpeg",
-      title: "Renting",
-      reverse: false,
-      description:  "Disponibilizamos serviço profissional de renting de displays LED para eventos, empresas, instituições e campanhas publicitárias. Fornecemos soluções completas de aluguer de ecrãs LED de alta qualidade, adaptadas a diferentes dimensões, ambientes e necessidades de comunicação.",
-      image:"https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-20T124104.359.jpg",
-      over_text: {
-        text_1: "Ecrãs Leds de alta definição",
-        text_2: "Adptados para todo tipo de eventos",
-      },
-    },
-    {
-      title: "Orçamentação",
-      reverse: true,
-      description:
-        "Propostas transparentes e comparáveis: dimensionamento, TCO (custo total de propriedade), consumo energético estimado, opções de financiamento e prazos de entrega. Indicamos o ROI esperado por cenário (retalho, eventos, corporate) e alinhamos tudo com o teu budget — sem surpresas, só clareza.",
-      image:
-        "https://images.pexels.com/photos/8297017/pexels-photo-8297017.jpeg",
-      over_text: {
-        text_1: "Propostas que convencem",
-        text_2: "ROI • TCO • Financiamento",
-      },
-    },
-  ];
-
-  const [LoadingStatus, SetLoadingStatus] = useState(null);
-  const [LoadingData, SetLoadingData] = useState([]);
-  const isBrowser = typeof window !== "undefined";
-  const protocol =
-    isBrowser && window.location.protocol === "https:" ? "https" : "http";
-  const BaseUrl =
-    protocol === "https"
+  const BaseUrl = useMemo(() => {
+    if (typeof window === "undefined") return "https://waveledserver.vercel.app";
+    const protocol = window.location.protocol === "https:" ? "https" : "http";
+    return protocol === "https"
       ? "https://waveledserver.vercel.app"
       : "http://localhost:4000";
+  }, []);
 
-  async function LoadData() {
-    try {
-      const response = await axios.get(BaseUrl + "/api/featured", {
-        withCredentials: true,
+  async function loadServicesPage() {
+    setLoading(true);
+    setError("");
+    try { 
+      const res = await axios.get(`${BaseUrl}/api/cms/services`, {
+        withCredentials: true,  
       });
-      const data = response?.data?.data ? response?.data?.data : [];
-      SetLoadingData(data);
-    } catch (error) {
-      console.clear();
-      console.log(error);
+
+      const doc = res?.data?.data || null;
+      setPage(doc);
+    } catch (e) {
+      setError(
+        e?.response?.data?.error ||
+          e?.message ||
+          "Não foi possível carregar a página de serviços."
+      );
+      setPage(null);
     } finally {
+      setLoading(false);
     }
-    SetLoadingStatus(true);
   }
 
   useEffect(() => {
-    LoadData();
-  }, []);
+    loadServicesPage(); 
+  }, [BaseUrl]);
 
-  return (
-    <>
-      {Sections.map((item, index) => (
-        <div key={index}>
-          <div className="section bg-light1 tekup-section-padding2">
-            <div className="container">
-              <div className={`content-area ${item.reverse ? "reverse" : ""}`}>
-                <div className="tekup-section-title">
-                  <h2>{item.title}</h2>
-                  <p>{item.description}</p>
-                  <Link href="/contact-us" className="tekup-default-btn">
-                    Saiba mais
-                  </Link>
-                </div>
-                <div style={{ padding: "20px" }} className="image serv-img">
+  const hero = page?.hero || { title: "", description: "" };
+  const boxes = Array.isArray(page?.boxes) ? page.boxes : [];
+  const blocks = Array.isArray(page?.content_blocks) ? page.content_blocks : [];
+  const sectionsOrder = Array.isArray(page?.sections_order)
+    ? page.sections_order
+    : ["hero", "boxes", "content"];
+ 
+  const serviceBlocks = blocks.filter((b) => (b?.type || "service") === "service"); 
+  const overlayBlocks = blocks.filter((b) => b?.type === "overlay");
+
+  if (loading) {
+    return (
+      <div className="section bg-light1 tekup-section-padding2">
+        <div className="container">
+          <div className="tekup-section-title">
+            <h2>A carregar serviços…</h2>
+            <p>Por favor aguarde.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="section bg-light1 tekup-section-padding2">
+        <div className="container">
+          <div className="tekup-section-title">
+            <h2>Serviços</h2>
+            <p style={{ marginBottom: 12 }}>{error}</p>
+            <button className="tekup-default-btn" onClick={loadServicesPage}>
+              Tentar novamente
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!page) return null;
+
+  const renderHero = () => {
+    if (!hero?.title && !hero?.description) return null;
+
+    return (
+      <div className="section bg-light1 tekup-section-padding2">
+        <div className="container">
+          <div className="tekup-section-title">
+            {hero?.title ? <h2>{hero.title}</h2> : null}
+            {hero?.description ? <p>{hero.description}</p> : null}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+ 
+
+  const renderServiceBlock = (item, index) => {
+    const title = item?.title || "";
+    const description = item?.description || "";
+    const image = item?.image || "";
+    const reverse = index % 2 === 1;  
+    if (!title && !description && !image) return null;
+
+    return (
+      <div key={item?._id || `service-${index}`}>
+        <div className="section bg-light1 tekup-section-padding2">
+          <div className="container">
+            <div className={`content-area ${reverse ? "reverse" : ""}`}>
+              <div className="tekup-section-title">
+                {title ? <h2>{title}</h2> : null}
+                {description ? <p>{description}</p> : null}
+                <Link href="/contact-us" className="tekup-default-btn">
+                  Saiba mais
+                </Link>
+              </div>
+
+              <div style={{ padding: "20px" }} className="image serv-img">
+                {image ? (
                   <img
                     style={{
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
                     }}
-                    src={item.image}
-                    alt={item.title}
+                    src={image}
+                    alt={title || "Serviço"}
                     loading="lazy"
                   />
-                </div>
+                ) : null}
               </div>
             </div>
           </div>
-          {item.video ? (
-            <section className="video-area">
-              <img src={item.video} alt={item.title} loading="lazy" />
-              <div className="over-video-large">
-                <div className="tekup-section-padding">
-                  <div className="container">
-                    <h2>{item.over_text.text_1}</h2>
-                    <h2>{item.over_text.text_2}</h2>
-                    <br />
-                    <Link href="/contact-us">
-                      <button className="tekup-default-btn">
-                        Solicitar Orçamento
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </section>
-          ) : (
-            <></>
-          )}
         </div>
-      ))}
+      </div>
+    );
+  };
+
+  const renderOverlayBlock = (item, index) => {
+    const bgImage = item?.image || ""; 
+    const text1 = item?.title || "";
+    const text2 = item?.subtitle || "";
+
+    if (!bgImage && !text1 && !text2) return null;
+
+    return (
+      <section className="video-area" key={item?._id || `overlay-${index}`}>
+        {bgImage ? <img src={bgImage} alt={text1 || "Overlay"} loading="lazy" /> : null}
+
+        <div className="over-video-large">
+          <div className="tekup-section-padding">
+            <div className="container">
+              {text1 ? <h2>{text1}</h2> : null}
+              {text2 ? <h2>{text2}</h2> : null}
+              <br />
+              <Link href="/contact-us">
+                <button className="tekup-default-btn">Solicitar Orçamento</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const renderContent = () => {
+    // Ordem final:
+    // para manter o comportamento “secção + overlay” repetido,
+    // fazemos: renderiza services (cada um) e, por baixo, se existir um overlay com o mesmo index, renderiza também.
+    if (!serviceBlocks.length && !overlayBlocks.length) return null;
+
+    const max = Math.max(serviceBlocks.length, overlayBlocks.length);
+    const out = [];
+
+    for (let i = 0; i < max; i++) {
+      const s = serviceBlocks[i];
+      const o = overlayBlocks[i];
+
+      if (s) out.push(renderServiceBlock(s, i));
+      if (o) out.push(renderOverlayBlock(o, i));
+    }
+
+    return <>{out}</>;
+  };
+
+  return (
+    <>
+      {sectionsOrder.map((sectionKey) => { 
+        if (sectionKey === "content") return <div key="content">{renderContent()}</div>;
+        return null;
+      })}
     </>
   );
 }

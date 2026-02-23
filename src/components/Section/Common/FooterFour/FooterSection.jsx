@@ -349,10 +349,7 @@ export default function FooterFore(props) {
             </div>
           </div>
 
-          <div
-            className="tekup-footer-bottom"
-            style={{ borderTop: "1px solid #eaeaea" }}
-          >
+          <div className="tekup-footer-bottom"  style={{borderTop:"1px solid #eaeaea"}}   >
             <div className="row">
               <div className="col-md-6">
                 <div className="tekup-copywright right">
