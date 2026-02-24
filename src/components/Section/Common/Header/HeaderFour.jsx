@@ -632,10 +632,7 @@ const HeaderFourInner = () => {
                 >
                   Contactos
                 </Link>
-              </li>
-              <div className="toggle-dark-theme" onClick={() => ToggleTheme()}>
-                {IsSiteDark ? <GoSun /> : <RiMoonFoggyLine />}
-              </div>
+              </li> 
               <div className="tekup-header-icon">
                 <div
                   className="tekup-header-barger dark"
@@ -649,6 +646,10 @@ const HeaderFourInner = () => {
             <div className="d-flex">
               <div className="lang-block">
                 <LanguageSwitcher />
+              </div>
+
+              <div className="toggle-dark-theme" onClick={() => ToggleTheme()}>
+                {IsSiteDark ? <GoSun /> : <RiMoonFoggyLine />}
               </div>
               <div
                 className="mobile-menu-trigger"
