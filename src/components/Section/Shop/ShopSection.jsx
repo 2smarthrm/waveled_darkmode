@@ -34,7 +34,7 @@ function FiveSolutionsSlider({ items }) {
             <h3 className="text-light">Soluções pensadas para atrair clientes</h3>
             <div>
             <p>
-              Soluções que transformam espaços, captam atenção e comunicam a sua marca com impacto, inovação e máxima
+              Soluções que transformam espaços, captam atenção e comunicam a sua marca <br /> com impacto, inovação e máxima
               qualidade visual.
             </p>
           </div>
@@ -168,159 +168,7 @@ function TwoNiceProducts({ items }) {
   );
 }
 
-function VideoSolutionsSlick() {
-  const videos = useMemo(
-    () => [
-      { id: "W0T-1cJf1Dw", title: "Displays LED Transparentes", desc: "Impacto visual sem bloquear a montra.", tag: "Transparent LED" },
-      { id: "6yQmGbdqHl8", title: "Painéis LED Modulares", desc: "Soluções flexíveis e escaláveis.", tag: "Modular" },
-      { id: "DCKDisbzpCI", title: "Experiências Imersivas", desc: "Ambientes digitais envolventes.", tag: "Immersive" },
-      { id: "kKRhtLj0Leg", title: "Eventos & Palcos", desc: "Ecrãs LED para grandes eventos.", tag: "Events" },
-      { id: "prdCz7tP0NQ", title: "LED Indoor & Outdoor", desc: "Alta luminosidade e fiabilidade.", tag: "Indoor / Outdoor" },
-    ],
-    []
-  );
-
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lbIndex, setLbIndex] = useState(0);
-
-  const openLightbox = (index) => {
-    setLbIndex(index);
-    setLightboxOpen(true);
-  };
-  const closeLightbox = () => setLightboxOpen(false);
-
-  const ytPoster = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-  const ytEmbed = (id) => `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-
-  const sliderRef = useRef(null);
-
-  const settings = {
-    dots: true,
-    arrows: true,
-    infinite: false,
-    speed: 500,
-    centerMode: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    accessibility: false,
-    focusOnSelect: false,
-    afterChange: (i) => setActiveSlide(i),
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 680, settings: { slidesToShow: 1, centerMode: false } },
-    ],
-  };
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      const y = window.scrollY;
-      sliderRef.current?.slickNext?.();
-      if (document.activeElement && typeof document.activeElement.blur === "function") document.activeElement.blur();
-      requestAnimationFrame(() => window.scrollTo({ top: y, left: 0, behavior: "auto" }));
-    }, 1500);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const onKey = (e) => e.key === "Escape" && closeLightbox();
-    document.addEventListener("keydown", onKey);
-
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [lightboxOpen]);
-
-  return (
-    <div>
-       <br /><br /><br /><br />
-        <section className="categorie-videos d-none vs-wrap">
-      <header className="vs-header">
-        <h2>Veja as nossas soluções em ação</h2>
-        <p>Displays LED transparentes, modulares e experiências imersivas</p>
-      </header>
-      <br />
-
-      <Slider ref={sliderRef} {...settings} className="vs-slider">
-        {videos.map((v, i) => (
-          <div key={v.id}>
-            <button className={`vs-card ${activeSlide === i ? "active" : ""}`} onClick={() => openLightbox(i)} type="button">
-              <div className="vs-thumb">
-                <img src={ytPoster(v.id)} alt={v.title} />
-                <div className="vs-over">
-                  <div className="vs-play">
-                    <IoPlay />
-                  </div>
-                </div>
-                <span className="vs-tag">{v.tag}</span>
-              </div>
-
-              <div className="vs-info">
-                <strong>{v.title}</strong>
-                <span>{v.desc}</span>
-              </div>
-            </button>
-          </div>
-        ))}
-      </Slider>
-      {lightboxOpen && (
-        <div
-          className="vs-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Vídeo"
-          onMouseDown={(e) => {
-            if (e.target === e.currentTarget) closeLightbox();
-          }}
-        >
-          <button className="vs-close" onClick={closeLightbox} aria-label="Fechar vídeo" title="Fechar" type="button">
-            ✕
-          </button>
-
-          <div className="vs-video" onMouseDown={(e) => e.stopPropagation()}>
-            <iframe
-              key={videos[lbIndex].id}
-              src={ytEmbed(videos[lbIndex].id)}
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              title={videos[lbIndex]?.title}
-            />
-          </div>
-        </div>
-      )}
-
-      <style jsx>{`
-        .vs-wrap { padding: 80px 20px; background: #f2f3fc; margin: 50px 0px; }
-        .vs-header { text-align: center; margin-bottom: 30px; }
-        .vs-header h2 { margin: 10px 0 4px; }
-        .vs-header p { opacity: 0.7; }
-        .vs-card { border: none; background: transparent; padding: 0 10px; cursor: pointer; transform: scale(0.9); transition: transform 0.3s ease; }
-        .vs-card.active { transform: scale(1); }
-        .vs-thumb { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-        .vs-thumb img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-        .vs-over { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-        .vs-play { width: 60px; height: 60px; background: #0019ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; }
-        .vs-tag { position: absolute; top: 12px; left: 12px; background: white; padding: 6px 10px; border-radius: 999px; }
-        .vs-info { margin-top: 12px; text-align: left; }
-        .vs-info strong { display: block; }
-        .vs-info span { opacity: 0.7; }
-        .vs-modal { position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.72); display: flex; align-items: center; justify-content: center; padding: 18px; }
-        .vs-close { position: fixed; top: 18px; right: 18px; z-index: 1000000; width: 44px; height: 44px; border-radius: 999px; border: none; cursor: pointer; background: rgba(255,255,255,0.14); color: #fff; font-weight: 900; font-size: 18px; backdrop-filter: blur(6px); }
-        .vs-close:hover { background: rgba(255,255,255,0.22); }
-        .vs-video { width: min(1100px, 100%); aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; background: transparent; box-shadow: 0 20px 70px rgba(0,0,0,0.35); }
-        .vs-video iframe { width: 100%; height: 100%; border: none; display: block; background: #000; }
-        @media (max-width: 720px) { .vs-close { top: 12px; right: 12px; width: 42px; height: 42px; } }
-      `}</style>
-    </section>
-    </div>
-  );
-}
-
+ 
 function MoreProducts({ items }) {
   return (
     <div className="categorie-page-products">
@@ -417,7 +265,7 @@ export default function ShopSection() {
     load();
   }, [areaId, API_BASE]);
 
-  if (loading) {
+  if (loading) {  
     return (
       <div className="container text-center">
         <div className="loader-wrap" role="status" aria-live="polite" aria-label="Carregando conteúdo">
@@ -635,10 +483,7 @@ export default function ShopSection() {
         </div>
       )}
 
-      <aside>
-        <VideoSolutionsSlick />
-      </aside>
-
+   
       {mostUsed.length > 0 && (
         <div className="container">
           <aside>
