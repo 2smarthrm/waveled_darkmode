@@ -4097,7 +4097,12 @@ body .image-prd img{
   height:100%;
 }
 
- 
+
+
+body .about-info-section li{
+  font-size:15px !important;
+}
+
 
 @media screen and (max-width:900px){
    body .heroFull{
@@ -4142,6 +4147,8 @@ body .image-prd img{
    body .home-top-product .top-product-card p{
      display: none; 
    } 
+
+ 
 
      body .home-top-product .top-product-card{
        min-height:350px;   
@@ -4213,6 +4220,35 @@ body .image-prd img{
 
     body #pills-tabContent #pills-description li{
         flex-wrap: wrap;
+    }
+
+    body .categorie-page .categorie-page-two article img{
+      min-height:300px;
+      max-height:300px;
+    }
+
+    body .over-product-blur .slider-container{
+      justify-content:center !important;
+    }
+
+    body .over-product-blur .slider-container .slider-arrow{
+      position: absolute;
+      top:145px;
+      z-index:100;
+    }
+
+       body .over-product-blur .slider-container .slider-arrow.right{
+          right:20px;
+       }
+
+
+          body .over-product-blur .slider-container .slider-arrow.left{
+            left:20px;
+          }
+
+
+    body .brand-logo-nav{
+        max-width:180px !important;
     }
 
       body .br-1x,
@@ -4405,6 +4441,8 @@ body.dark-wave .tekup-main-form select{
   border-color:#62626200;
 }
 
+body.dark-wave .table td,
+body.dark-wave .table th,
 body.dark-wave .categorie-page-products,
 body.dark-wave .categorie-page-products a strong,
 body.dark-wave .tekup-main-form {
@@ -4509,7 +4547,7 @@ body .transparent-header  .site-navbar .contact-badge a{
 }
 
 
-body.dark-wave .services-row-items .col-xl-4 .tekup-iconbox-wrap4,
+body.dark-wave .services-row-items .col-lg-6 .tekup-iconbox-wrap4,
 body.dark-wave .about-page-area .abt-st, 
 body.dark-wave .wl-filter-card{
   background-color:#1c1f24 !important;
@@ -4701,8 +4739,7 @@ body .tekup-main-form label,
 body .tekup-main-form input,
 body .tekup-related-product-section small,
 body .tekup-main-form p,
-.tekup-contact-info a,
-body .tekup-default-content a,
+.tekup-contact-info a, 
 body .tekup-main-form textarea,
 body .tekup-contact-info-wrap .tekup-contact-info a,
 body .tekup-contact-info-wrap .tekup-contact-info ,
@@ -4715,6 +4752,11 @@ body .tekup-main-form{
 body .tekup-main-form #consent{
   width:30px !important;
   height:30px !important;
+}
+
+
+body .tekup-default-content .tekup-default-btn{
+   margin-bottom:20px;
 }
 
 
@@ -4914,4 +4956,33 @@ body.dark-wave .wl-mega .wl-slide-cta{
 
 body .pagination button{
   font-size:15px !important;
+}
+
+
+body .categorie-main-item h2{
+  font-size:30px !important;
+}
+
+  
+body .tekup-iconbox-wrap4{
+   padding:25px 40px;
+   min-height:330px;
+}
+
+body .tekup-iconbox-wrap4 .tekup-iconbox-icon4{
+   width:120px;
+   height:120px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius:100%;
+   margin:0 auto; 
+  background-color:#121212; 
+  border:4px solid #181c24;
+}
+
+
+body .tekup-iconbox-wrap4 .tekup-iconbox-icon4 img{
+  width:70px;
+  height:70px; 
 }
