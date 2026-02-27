@@ -315,29 +315,33 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
         }
 
         .pi-tabs-top {
-          display: flex;
-          justify-content: center;
-          gap: 12px;
-          margin: 0 0 30px;
-          flex-wrap: wrap;
-        }
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 0 30px;
+            flex-wrap: wrap;
+        } 
+
         .pi-tab {
-          background: #ffffff;
-          color: #111;
-          padding: 10px 16px;
-          border-radius: 12px;
-          font-size: 18px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: background 160ms, color 160ms, border 160ms, transform 160ms;
+            background: #ffffff;
+            color: #111;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 160ms, color 160ms, border 160ms, transform 160ms;
         }
+ 
+
         .pi-tab:hover {
           transform: translateY(-1px);
-        }
+        } 
+
         .pi-tab.active {
-          background: #1740ff;
-          border-color: #1740ff;
-          color: #fff;
+            background: #1740ff;
+            border-color: #1740ff;
+            color: #fff;
         }
 
         .pi-root {
@@ -346,6 +350,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
           gap: 24px;
           align-items: stretch;
         }
+
         @media (max-width: 992px) {
           .pi-root {
             grid-template-columns: 1fr;
@@ -649,8 +654,7 @@ function ProductSkeleton() {
             </div>
           </div>
         </div>
-      </div>
-
+      </div> 
       <IndustriesSkeleton />
     </>
   );
@@ -706,8 +710,7 @@ export default function SingleShopSection() {
       const items = document.querySelectorAll("#pills-description ul li");
 
       items.forEach((li) => {
-        if (li.querySelector(".svg-chip")) return;
-
+        if (li.querySelector(".svg-chip")) return; 
         const img = document.createElement("img");
         img.classList.add("svg-chip");
         img.src = svg;
@@ -755,8 +758,8 @@ export default function SingleShopSection() {
 
 
       try { 
-  const CACHE_REVALIDATE_MS = 60 * 60 * 10;/// 1hora = 1000   
-  const CACHE_BG_REFRESH_MS = 60 * 60 * 10;/// 1hora = 1000  
+  const CACHE_REVALIDATE_MS = 60 * 60 * 10;  
+  const CACHE_BG_REFRESH_MS = 60 * 60 * 10; 
   const isBrowser = typeof window !== "undefined";
 
   const hasLocalStorage = () => {
@@ -806,7 +809,7 @@ export default function SingleShopSection() {
         JSON.stringify({ ts: Date.now(), data })
       );
     } catch {
-      // ignore
+    
     }
   };
 

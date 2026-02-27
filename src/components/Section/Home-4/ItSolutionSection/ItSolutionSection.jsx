@@ -43,13 +43,13 @@ const ItSolutionSection = () => {
           {/* TEXTO PRINCIPAL */}
           <div className="col-lg-6 d-flex align-items-center">
             <div className="tekup-default-content mr-60">
-              <h2>Especialistas em painéis LED para empresas e desporto</h2>
+              <h2>Especialistas em <br/> Painéis LED</h2>
               <p>
-                Somos uma equipa especializada na montagem e fornecimento de
-                painéis LED para empresas, espaços desportivos e eventos.
-                Garantimos soluções personalizadas, tecnologia de ponta e
-                equipamentos de elevada fiabilidade, ajudando a sua marca a
-                destacar-se todos os dias — em interiores ou exteriores.
+                Somos uma equipa especializada no planeamento,
+                implementação e gestão de projectos em Soluções LED para
+                ambientes de interior e exterior, garantindo soluções
+                personalizadas, inovação e equipamentos de elevada fiabilidade,
+                impulsionando a presença da sua sua marca.
               </p>
 
               <div className="tekup-extra-mt">
@@ -92,16 +92,16 @@ const ItSolutionSection = () => {
               />
             </div>
           </div> 
-          {/* TEXTO PRINCIPAL */}
+          {/* TEXTO PRINCIPAL */} 
           <div className="col-lg-6 d-flex align-items-center">
             <div className="tekup-default-content mr-60">
-              <h2>Especialistas em painéis LED para empresas e desporto</h2>
+              <h2>Soluções em Paineis LED <br/> para várias Aplicações</h2>
               <p>
-                Somos uma equipa especializada na montagem e fornecimento de
-                painéis LED para empresas, espaços desportivos e eventos.
-                Garantimos soluções personalizadas, tecnologia de ponta e
-                equipamentos de elevada fiabilidade, ajudando a sua marca a
-                destacar-se todos os dias — em interiores ou exteriores.
+                Contamos com um portfolio de soluções especializadas e
+                inovadoras adaptadas ás suas necessidades em destaque nas
+                áreas de Retalho, Corporate, Rental, Hotelaria, Cultura, Educação,
+                Saúde, Desporto, Transportes e Broadcast, com o objectivo de
+                promover a visibilidade e o impacto da sua comunicação. 
               </p>
 
               <div className="tekup-extra-mt">
@@ -129,7 +129,7 @@ const ItSolutionSection = () => {
           loading="lazy"
         />
       </div>
-
+ 
       <div className="over-card">
         <h3>Painéis LED para publicidade exterior</h3>
         <p>

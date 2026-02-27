@@ -172,7 +172,7 @@ export default function ServiceSection() {
   };
 
   const renderContent = () => {
-    // Ordem final:
+    // Ordem final: 1760 - 40 - 130 - 140 - 300 - 1100 
     // para manter o comportamento “secção + overlay” repetido,
     // fazemos: renderiza services (cada um) e, por baixo, se existir um overlay com o mesmo index, renderiza também.
     if (!serviceBlocks.length && !overlayBlocks.length) return null;

@@ -280,16 +280,14 @@ export default function HeroSection() {
 
         <Slider ref={sliderRef} {...settings} className="heroSlider">
           {slides.map((s) => (
-            <div key={s.id} className="slide">
-              
+            <div key={s.id} className="slide"> 
               <div className="media">
                 <img src={s.image} alt={s.title} className="bg" />
                 <div className="overlay" />
-              </div>
-
+              </div> 
               <div className="content"> 
-                  <h1  className="title"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.title),}}></h1> 
-                  <p   className="desc"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(s.description),}}></p> 
+                  <h1 className="title"  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(s.title),}}></h1> 
+                  <p className="desc"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(s.description),}}></p> 
                 <div className="actions">
                   <button type="button" className="tekup-default-btn" onClick={() => handleLink(s.link || "/about-us")}>
                     {s.button || "Saber mais"}
@@ -298,8 +296,7 @@ export default function HeroSection() {
               </div>
             </div>
           ))}
-        </Slider>
-
+        </Slider> 
         {slidesLoading ? <div className="loadingBadge placeholder-glow"></div> : null}
       </div>
 
