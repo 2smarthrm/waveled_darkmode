@@ -10,32 +10,30 @@ const AccordionSection = () => {
           <div className="col-lg-6">
             <div className="tekup-default-content mr-60">
               <h2 className="mb-3">
-                Aluguer de Painéis LED para Eventos e Projetos
+                 Aluguer de Painéis LED para Eventos (Rental)
               </h2>
-
+ 
+              
               <p className="mb-3">
-                Quer criar impacto visual profissional sem investir em
-                equipamento próprio? O <strong>Aluguer de LED</strong> é a opção{" "}
-                <strong>mais económica, prática e flexível</strong> para feiras,
-                lançamentos, conferências, espetáculos e ativações de marca.
-                Tratamos de tudo: consultoria, logística, montagem, operação e
-                desmontagem.
+                 Criar impacto visual sem investir em equipamento próprio? <br/>
+                  Sim, é possivel ! <br/> O Aluguer de soluções LED (Rental) é a
+                  opção mais económica, prática e flexível para eventos, feiras,
+                  novos lançamentos de produto, conferências, espetáculos entre
+                  outras aplicações.
               </p>
 
               <p className="mb-3">
-                Trabalhamos com tecnologia de última geração e desenvolvemos
-                soluções ajustadas a cada evento. Em ambientes interiores ou
-                exteriores, garantimos brilho, contraste e fiabilidade para
-                elevar a experiência do público e destacar a sua marca.
+                A Waveled conta com soluções de última geração, ajustadas a
+                cada necessidade, oferecendo uma gama completa de servicos
+                como consultoria, operação, instalação e desinstalação.
               </p>
 
-              <ul className="mb-4">
-                <li>Indoor e Outdoor, com brilho e contraste superiores.</li>
-                <li>Formatos modulares: 16:9, panorâmico, totem, palco e mais.</li>
-                <li>Vários pixel pitch (P2.6, P3.9, P4.8) conforme distância.</li>
-                <li>Equipa técnica no local (opcional).</li>
-                <li>Planos flexíveis: diária ou evento completo.</li>
-              </ul>
+              <p className="mb-3">
+                Contando com amplo portfolio de soluções para ambiente interior
+                ou exterior, garantimos brilho, contraste e fiabilidade para elevar a
+                experiência do público e destacar a sua comunicação.
+              </p>
+
 
               <div className="tekup-extra-mt d-flex gap-3 flex-wrap">
                 <Link className="tekup-default-btn" href="/contact-us">
@@ -77,19 +75,12 @@ const AccordionSection = () => {
                     </Accordion.Header>
 
                     <Accordion.Body>
-                      <p className="mb-2">
-                        No modelo de aluguer paga apenas pelos{" "}
-                        <strong>dias de utilização</strong>, sem necessidade de
-                        investir em compra, transporte, armazenamento ou manutenção.
-                      </p>
-
-                      <p className="mb-2">
-                        A nossa equipa trata de todo o processo: transporte, montagem
-                        e desmontagem, podendo também operar os equipamentos durante
-                        o evento. Utilizamos módulos LED versáteis, adequados a
-                        diferentes <em>formatos</em> e <em>resoluções</em>, tanto{" "}
-                        <em>indoor</em> como <em>outdoor</em>.
-                      </p>
+                      Menor investimento inicial <br/><strong> Maior flexibilidade</strong> <br/>Custo
+                      previsivel <br/> Acesso a tecnologia atualizada <br/> Soluções
+                      ajustadas á necessidade actual <br/> Manutenção incluída <br/>
+                      <strong>A nossa equipa especializada assegura todo o processo: </strong>
+                      transporte, montagem e desmontagem, com possibilidade de
+                      operar os equipamentos durante o evento.
                     </Accordion.Body>
                   </Accordion.Item>
                 </div>

@@ -157,8 +157,7 @@ function ProductIndustries({ examples = [], autoPlayMs = 3500 }) {
   }, [all, hasMoreThanThreshold]);
 
   return (
-    <div className="pi-wrap" onKeyDown={onKeyDown}>
-      
+    <div className="pi-wrap" onKeyDown={onKeyDown}> 
       <div className="pi-tabs-top" role="tablist" aria-label="Exemplos">
         <button
           type="button"
@@ -1157,6 +1156,8 @@ export default function SingleShopSection() {
       <div className="section tekup-section-padding pt-5 pb-2">
         <div className="container">
           <div className="tekup-product-tab">
+
+            
             <ul className="nav nav-pills" id="pills-tab" role="tablist">
               <li className="nav-item" role="presentation">
                 <button

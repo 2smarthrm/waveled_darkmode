@@ -118,14 +118,19 @@ const TestimonialSection = () => {
       <div className="section dark-bg blur-slide-screen section-testimonial" style={{ position: "relative" }}>
         <div className="image-wall">
           <img
-            src="https://ik.imagekit.io/fsobpyaa5i/happy-diverse-friends-celebrating-with-sparklers-o-2025-02-13-00-11-44-utc.jpg"
+            src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-27T144858.408.jpg"
             alt="waveled"
           />
         </div>
         <section className="over-product-blur" ref={blurRef}>
+          <div className="title-container">
+            <div className="container-title">
+               <h3>Soluções de quiosque digital</h3>
+            </div>
+          </div>
           {loadingData.length > 0 && (
             <div
-              className="slider-container slider-container-area"
+              className="slider-container slider-container-area" 
               ref={sliderRef}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -184,8 +189,7 @@ const TestimonialSection = () => {
                         <div className="text">
                           <Link href={`single-shop?product=${product?._id || ""}`}>
                             <h4>{truncatedName}</h4>
-                          </Link>
-                          <p>{truncatedSpecs}</p>
+                          </Link> 
                         </div>
                       </article>
                     );

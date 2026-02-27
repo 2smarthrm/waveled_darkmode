@@ -74,10 +74,10 @@ const ItSolutionSection = () => {
             </div>
           </div>  
         </div>
-          <br /><br />
+          <br /><br /> 
       </div> 
            <div >
-               <img className="image-home" src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-05T162518.496.png" alt="" />
+               <img className="image-home" src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-27T144951.695.png" alt="" />
            </div>
           <div className="container"> 
           <br /><br />
@@ -131,15 +131,16 @@ const ItSolutionSection = () => {
       </div>
  
       <div className="over-card">
-        <h3>Painéis LED para publicidade exterior</h3>
+        <h3>Painéis LED Billboard <br/> para publicidade exterior</h3>
         <p>
           <small>
-            Soluções de painéis LED de grande formato para publicidade exterior,
-            ideais para outdoors, fachadas e estruturas urbanas. Garantem alta
-            luminosidade, excelente visibilidade à distância.
+            Painéis LED Digital Billboard de grande formato,
+             ideais para outdoors, fachadas e estruturas urbanas.
+            Garantem alta luminosidade, permitindo excelente
+            visibilidade à distância.
           </small>
         </p>
-
+ 
         <Link className="tekup-default-btn" href="/contact-us">
           Solicitar projeto <i className="ri-arrow-right-up-line"></i>
         </Link>
@@ -157,12 +158,13 @@ const ItSolutionSection = () => {
       </div>
 
       <div className="over-card">
-        <h3>Telas LED para salas de reunião e ambientes corporativos</h3>
+        <h3>Soluções LED para salas de <br/> reunião e ambientes corporativos</h3>
         <p>
           <small>
-            Telas LED profissionais para salas de reunião, auditórios e espaços
-            corporativos. Ideais para apresentações, dashboards, videoconferência
-            e visualização de dados em tempo real.
+              Ecrãs LED profissionais para salas de reunião,
+              auditórios e espacos corporativos. <br/> Ideais para
+              apresentações, videoconferência e visualização de
+              dados em tempo real.
           </small>
         </p>
 
@@ -186,13 +188,15 @@ const ItSolutionSection = () => {
                <img src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-06T092715.800%20(1).png" alt="#" />
             </div>
             <div className="text-area">
-              <h2>Prateleiras digitais que Aumentam as Vendas</h2>
-              <p>
+              <h2>Prateleiras digitais para <br/> Comercio com Impacto</h2>
+              <p> 
                 <small>
-                 Leve a comunicação no ponto de venda a outro nível. As prateleiras digitais com 
-                 Display LED combinam design discreto, alta definição e conteúdos
-                  dinâmicos para destacar preços, promoções e campanhas no exato momento da decisão. 
-                  Mais visibilidade, mais impacto, mais vendas — de forma automática e moderna.
+                   Eleve a comunicação a outro nivel no ponto de venda, as
+                    prateleiras digitais Display LED combinam design
+                    discreto e moderno com alta definição e conteúdos
+                    dinâmicos para destacar preços, promoções e
+                    campanhas no momento exato da decisão, potenciando
+                    o volume de vendas
                 </small>
               </p>
               <Link className="tekup-default-btn" href="/contact-us">
