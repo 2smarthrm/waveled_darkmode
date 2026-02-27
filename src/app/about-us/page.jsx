@@ -8,7 +8,7 @@ import Link from "next/link";
 import { FiCheckCircle } from "react-icons/fi";
 
 export const metadata = {
-  title: "Sobre nós ",
+   title: "Sobre nós ",
 }; 
 
 const Aboutpage = () => {

@@ -1258,7 +1258,7 @@ body .featured-product.box-1 p {
 }
  
 body .blur-slide-screen {
-  height: 850px;
+  height: 750px;
   width: 100%;
   object-fit: cover;
   position: relative;
@@ -4985,4 +4985,24 @@ body .tekup-iconbox-wrap4 .tekup-iconbox-icon4{
 body .tekup-iconbox-wrap4 .tekup-iconbox-icon4 img{
   width:70px;
   height:70px; 
+}
+
+body .title-container{
+  position: absolute;
+  left:30px; 
+  width:100%;
+  padding-left:30px;
+  top:30px; 
+}
+
+body .title-container{
+  padding:10px;
+  padding-left:20px;
+  background-color:#0019ff;
+  width:max-content;
+  padding-right:40px;
+}
+
+body .title-container h3{
+  font-size:30px;
 }
