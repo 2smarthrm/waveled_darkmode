@@ -57,7 +57,7 @@ const ChooseUsSection = ({ className }) => {
 
         <div className="row services-row-items">
           {boxes.map((item, index) => (
-            <div className="col-xl-4 col-md-6" key={index}>
+            <div className="col-lg-6 col-md-6" key={index}>
               <div className="tekup-iconbox-wrap4">
                 <div className="tekup-iconbox-icon4">
                   <img
@@ -72,6 +72,20 @@ const ChooseUsSection = ({ className }) => {
               </div>
             </div>
           ))}
+             <div className="col-lg-6 col-md-6" key={""}>
+              <div className="tekup-iconbox-wrap4">
+                <div className="tekup-iconbox-icon4">
+                  <img
+                    src={"https://ik.imagekit.io/fsobpyaa5i/icons8-display-100.png"}
+                    alt={""}
+                  />
+                </div>
+                <div className="tekup-iconbox-data4">
+                  <h4>{"Renting"}</h4>
+                  <p>{"Disponibilizamos serviço profissional de renting de displays LED para eventos, empresas, instituições e campanhas publicitárias."}</p>
+                </div>
+              </div>
+            </div>
         </div>
         <br />
       </div>

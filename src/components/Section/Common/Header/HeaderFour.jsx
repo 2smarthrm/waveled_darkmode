@@ -600,20 +600,14 @@ const HeaderFourInner = () => {
                     {WindowSize >= 900 ? (
                       <SolutionMegaMenu />
                     ) : (
-                      <Link
-                        className="nav-link-item drop-trigger"
-                        href="/solution?area=695b880b926032a07bbefef7"
-                      >
+                      <Link  className="nav-link-item drop-trigger"  href="/solution?area=695b880b926032a07bbefef7" >
                         Soluções
                       </Link>
                     )}
                   </li>
                   <li className="nav-item">
                     {WindowSize <= 900 ? (
-                      <Link
-                        className="nav-link-item drop-trigger"
-                        href="contact-us"
-                      >
+                      <Link  className="nav-link-item drop-trigger"  href="contact-us">
                         Contactos
                       </Link>
                     ) : (
@@ -658,6 +652,9 @@ const HeaderFourInner = () => {
                 <span></span>
               </div>
             </div>
+
+
+
           </nav>
         </div>
       </div>
