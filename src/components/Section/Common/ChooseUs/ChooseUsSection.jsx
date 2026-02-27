@@ -76,7 +76,7 @@ const ChooseUsSection = ({ className }) => {
               <div className="tekup-iconbox-wrap4">
                 <div className="tekup-iconbox-icon4">
                   <img
-                    src={"https://ik.imagekit.io/fsobpyaa5i/icons8-display-100.png"}
+                    src={"https://ik.imagekit.io/fsobpyaa5i/icons8-entertainment-100%20(3).png"}
                     alt={""}
                   />
                 </div>
