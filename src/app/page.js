@@ -418,14 +418,14 @@ const HomeFour = ({ deviceType: deviceTypeProp }) => {
           <div className="container-fluid">
             <div className="tekup-section-title text-center">
               <h2 className="text-dark">
-                Conheça soluções pensadas para vender mais
+               Conheça as nossas Soluções
               </h2>
               <p className="text-muted">
-                Projetos e aplicações reais dos nossos produtos.
+                  Destaque a sua Marca e Potencie o seu Negócio.
               </p>
             </div>
 
-            <div
+            <div 
               className="row-featured"
               aria-live="polite"
               aria-busy={verticalLoading ? "true" : "false"}

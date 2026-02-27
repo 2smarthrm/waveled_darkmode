@@ -16,8 +16,7 @@ const Aboutpage = () => {
     <div className="about-page-area">
       <HeaderFour className="tekup-header-top bg-light1" />
       <br />
-      <br />
-      <br />
+      <br /> 
 
       <section className="about-hero abt-st">
         <div className="about-over">
