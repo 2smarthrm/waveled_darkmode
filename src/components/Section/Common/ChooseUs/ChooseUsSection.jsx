@@ -53,8 +53,7 @@ const ChooseUsSection = ({ className }) => {
             </Link>
           </div>
           <br />
-        </div>
-
+        </div> 
         <div className="row services-row-items">
           {boxes.map((item, index) => (
             <div className="col-lg-6 col-md-6" key={index}>
@@ -71,7 +70,7 @@ const ChooseUsSection = ({ className }) => {
                 </div>
               </div>
             </div>
-          ))}
+           ))}
              <div className="col-lg-6 col-md-6" key={""}>
               <div className="tekup-iconbox-wrap4">
                 <div className="tekup-iconbox-icon4">
