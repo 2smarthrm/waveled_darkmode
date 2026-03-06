@@ -30,17 +30,12 @@ const ItSolutionSection = () => {
   }, []);
 
   return (
-    <div
-      className="section py-2 pb-0 tekup-section-padding"
-      id="counter-home-four"
-    >
+    <div className="section py-2 pb-0 tekup-section-padding" id="counter-home-four">
       <br />
       <div id="tekup-counter"></div>
       <br /><br /><br />
       <div className="container">
-        <div className="row">
-          
-          {/* TEXTO PRINCIPAL */}
+        <div className="row"> 
           <div className="col-lg-6 d-flex align-items-center">
             <div className="tekup-default-content mr-60">
               <h2>Especialistas em <br/> Painéis LED</h2>
@@ -61,9 +56,7 @@ const ItSolutionSection = () => {
                 </Link>
               </div>
             </div>
-          </div>
-
-          {/* IMAGEM PRINCIPAL */}
+          </div> 
           <div className="col-lg-6 order-lg-2">
             <div className="tekup-thumb ml-60">
               <img
@@ -81,8 +74,7 @@ const ItSolutionSection = () => {
            </div>
           <div className="container"> 
           <br /><br />
-          <div className="row row-reverse">
-          {/* IMAGEM PRINCIPAL */}
+          <div className="row row-reverse"> 
           <div className="col-lg-6 order-lg-2">
             <div className="tekup-thumb ml-60">
               <img
@@ -91,8 +83,7 @@ const ItSolutionSection = () => {
                 alt="Painel LED instalado em contexto desportivo"
               />
             </div>
-          </div> 
-          {/* TEXTO PRINCIPAL */} 
+          </div>  
           <div className="col-lg-6 d-flex align-items-center">
             <div className="tekup-default-content mr-60">
               <h2>Soluções em Paineis LED <br/> para várias Aplicações</h2>
@@ -115,72 +106,64 @@ const ItSolutionSection = () => {
             </div>
           </div>
         </div>
+      </div> 
+    <section className="section py-2 pb-0 tekup-section-padding">
+      <div className="home-top-product"> 
+        <article className="top-product-card">
+          <div className="image">
+            <img
+              src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-06T111509.472.jpg"
+              alt="Painel LED publicitário exterior"
+              loading="lazy"
+            />
+          </div>
+    
+          <div className="over-card">
+            <h3>Painéis LED Billboard <br/> para publicidade exterior</h3>
+            <p>
+              <small>
+                Painéis LED Digital Billboard de grande formato,
+                ideais para outdoors, fachadas e estruturas urbanas.
+                Garantem alta luminosidade, permitindo excelente
+                visibilidade à distância.
+              </small>
+            </p>
+    
+            <Link className="tekup-default-btn" href="/contact-us">
+              Solicitar projeto <i className="ri-arrow-right-up-line"></i>
+            </Link>
+          </div>
+        </article> 
+        <article className="top-product-card">
+          <div className="image">
+            <img
+              src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-05T171414.231.png"
+              alt="Tela LED em sala de reuniões corporativa"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="over-card">
+            <h3>Soluções LED para salas de <br/> reunião e ambientes corporativos</h3>
+            <p>
+              <small>
+                  Ecrãs LED profissionais para salas de reunião,
+                  auditórios e espacos corporativos. <br/> Ideais para
+                  apresentações, videoconferência e visualização de
+                  dados em tempo real.
+              </small>
+            </p>
+
+            <Link className="tekup-default-btn" href="/contact-us">
+              Solicitar projeto <i className="ri-arrow-right-up-line"></i>
+            </Link>
+          </div>
+        </article>
       </div>
-
-      {/* CARDS DE PRODUTO / SOLUÇÕES */}
-      <section className="section py-2 pb-0 tekup-section-padding">
-  <div className="home-top-product">
-    {/* 1º CARD – PAINÉIS LED PARA PUBLICIDADE EXTERIOR */}
-    <article className="top-product-card">
-      <div className="image">
-        <img
-          src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-06T111509.472.jpg"
-          alt="Painel LED publicitário exterior"
-          loading="lazy"
-        />
-      </div>
- 
-      <div className="over-card">
-        <h3>Painéis LED Billboard <br/> para publicidade exterior</h3>
-        <p>
-          <small>
-            Painéis LED Digital Billboard de grande formato,
-             ideais para outdoors, fachadas e estruturas urbanas.
-            Garantem alta luminosidade, permitindo excelente
-            visibilidade à distância.
-          </small>
-        </p>
- 
-        <Link className="tekup-default-btn" href="/contact-us">
-          Solicitar projeto <i className="ri-arrow-right-up-line"></i>
-        </Link>
-      </div>
-    </article>
-
-    {/* 2º CARD – TELAS LED PARA SALAS DE REUNIÃO E CORPORATE */}
-    <article className="top-product-card">
-      <div className="image">
-        <img
-          src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-05T171414.231.png"
-          alt="Tela LED em sala de reuniões corporativa"
-          loading="lazy"
-        />
-      </div>
-
-      <div className="over-card">
-        <h3>Soluções LED para salas de <br/> reunião e ambientes corporativos</h3>
-        <p>
-          <small>
-              Ecrãs LED profissionais para salas de reunião,
-              auditórios e espacos corporativos. <br/> Ideais para
-              apresentações, videoconferência e visualização de
-              dados em tempo real.
-          </small>
-        </p>
-
-        <Link className="tekup-default-btn" href="/contact-us">
-          Solicitar projeto <i className="ri-arrow-right-up-line"></i>
-        </Link>
-      </div>
-    </article>
-  </div>
-</section>
-
-
+    </section> 
       <br />
       <br />
-      <br />
-
+      <br /> 
       <section className="section py-2 rack-section pb-0 tekup-section-padding">
         <div className="container">
           <div className="rack-rows">
@@ -188,7 +171,7 @@ const ItSolutionSection = () => {
                <img src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-06T092715.800%20(1).png" alt="#" />
             </div>
             <div className="text-area">
-              <h2>Prateleiras digitais para <br/> Comercio com Impacto</h2>
+              <h2>Prateleiras digitais  para Comercio com Impacto</h2>
               <p> 
                 <small>
                    Eleve a comunicação a outro nivel no ponto de venda, as

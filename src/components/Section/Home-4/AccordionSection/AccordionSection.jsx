@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Accordion } from "react-bootstrap";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const AccordionSection = () => {
   return (
@@ -15,8 +16,8 @@ const AccordionSection = () => {
  
               
               <p className="mb-3">
-                 Criar impacto visual sem investir em equipamento próprio? <br/>
-                  Sim, é possivel ! <br/> O Aluguer de soluções LED (Rental) é a
+                 Criar impacto visual sem investir em equipamento próprio ? <br/>
+                  <strong>Sim, é possivel !</strong> <br/> O Aluguer de soluções LED (Rental) é a
                   opção mais económica, prática e flexível para eventos, feiras,
                   novos lançamentos de produto, conferências, espetáculos entre
                   outras aplicações.
@@ -56,10 +57,10 @@ const AccordionSection = () => {
                       <img
                         src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20(41).png"
                         alt="Palco com painel LED alugado"
-                        style={{ maxHeight: "400px", objectFit: "cover" }}
+                        style={{ maxHeight: "250px", objectFit: "cover" }}
                         className="img-fluid w-100 rounded"
                       />
-                    </div>
+                    </div> 
 
                     <Accordion.Header>
                       <div className="d-block">
@@ -75,9 +76,15 @@ const AccordionSection = () => {
                     </Accordion.Header>
 
                     <Accordion.Body>
-                      Menor investimento inicial <br/><strong> Maior flexibilidade</strong> <br/>Custo
-                      previsivel <br/> Acesso a tecnologia atualizada <br/> Soluções
-                      ajustadas á necessidade actual <br/> Manutenção incluída <br/>
+                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Menor investimento inicial</span> <br/>
+                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Maior flexibilidade </span> <br/>
+                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Custo  previsivel</span> <br/> 
+                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Acesso a tecnologia atualizada</span> <br/> 
+                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Soluções ajustadas á necessidade actual</span> <br/> 
+                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Manutenção incluída </span><br/> 
+                      <br />
+                      <hr />
+                      <br />
                       <strong>A nossa equipa especializada assegura todo o processo: </strong>
                       transporte, montagem e desmontagem, com possibilidade de
                       operar os equipamentos durante o evento.

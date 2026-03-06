@@ -15,7 +15,7 @@ const safeText = (s, fb = "") => (typeof s === "string" && s.trim() ? s : fb);
 const FactSection = () => {
   const [ActiveTab, setActiveTab] = useState(1);
 
-  // ---- dados dinâmicos ----
+ 
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
@@ -43,14 +43,12 @@ const FactSection = () => {
     })();
     return () => ac.abort();
   }, []);
-
-  // top 4 com descrições mais longas
+ 
   const topFour = useMemo(() => {
     const score = (s) => (safeText(s?.description).length || 0);
     return [...(solutions || [])].sort((a, b) => score(b) - score(a)).slice(0, 4);
   }, [solutions]);
-
-  // helper para render dinâmico por tab (com fallback)
+ 
   const TabContent = ({ item, fallbackTitle, fallbackDesc, fallbackImg, cta }) => {
     const title = item ? safeText(item.title, fallbackTitle) : fallbackTitle;
     const desc = item ? safeText(item.description, fallbackDesc) : fallbackDesc;
@@ -145,15 +143,13 @@ const FactSection = () => {
 
           <br />
           <br />
-
-          {/* estados (mantém design; apenas mensagens simples) */}
+ 
           {loading && (
             <div className="text-center text-muted">A carregar…</div>
           )}
           {err && <div className="alert alert-danger">{err}</div>}
 
-          <aside className="cat-tab-body">
-            {/* INDOOR -> topFour[0] */}
+          <aside className="cat-tab-body"> 
             <article
               className={ActiveTab === 1 ? "container-fluid box-tab" : "d-none"}
             >
@@ -165,8 +161,7 @@ const FactSection = () => {
                 cta={{ label: "Saiba mais", href: "/shop?category=indoor" }}
               />
             </article>
-
-            {/* OUTDOOR -> topFour[1] */}
+ 
             <article
               className={ActiveTab === 2 ? "container-fluid box-tab" : "d-none"}
             >
@@ -178,8 +173,7 @@ const FactSection = () => {
                 cta={{ label: "Saiba mais", href: "/shop?category=outdoor" }}
               />
             </article>
-
-            {/* ALUGUER -> topFour[2] */}
+ 
             <article
               className={ActiveTab === 3 ? "container-fluid box-tab" : "d-none"}
             >
@@ -191,8 +185,7 @@ const FactSection = () => {
                 cta={{ label: "Pedir orçamento", href: "/contact-us" }}
               />
             </article>
-
-            {/* DESPORTO -> topFour[3] */}
+ 
             <article
               className={ActiveTab === 4 ? "container-fluid box-tab" : "d-none"}
             >

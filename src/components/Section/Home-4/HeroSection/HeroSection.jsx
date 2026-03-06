@@ -54,6 +54,7 @@ export default function HeroSection() {
     setProgress(0);
   };
 
+ 
   const shouldRun = () => !userPaused && !pausedByInteraction;
 
   const tick = (t) => {
@@ -271,8 +272,7 @@ export default function HeroSection() {
               strokeDasharray={`${dash} ${c - dash}`}
               transform={`rotate(-90 ${size / 2} ${size / 2})`}
             />
-          </svg>
-
+          </svg> 
           <span className="miniIcon d-none" aria-hidden="true">
             {userPaused ? <FaPlay /> : <FaPause />}
           </span>

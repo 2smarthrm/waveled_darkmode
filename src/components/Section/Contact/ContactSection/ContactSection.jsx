@@ -567,8 +567,7 @@ export default function ContactSection() {
                         Autorizo a Waveled a contactar-me para responder a este pedido. Li e aceito a{" "}
                         <Link href="/privacy_and_policy" target="_blank">
                           Política de Privacidade. 
-                        </Link>
-                        .
+                        </Link>.
                       </label>
                     </div>
                     {errors.consent && <div className="invalid-feedback d-block">{errors.consent}</div>}
