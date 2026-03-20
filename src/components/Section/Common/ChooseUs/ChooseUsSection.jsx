@@ -15,7 +15,7 @@ const ChooseUsSection = ({ className }) => {
   }, []);
 
   useEffect(() => {
-    async function loadData() {
+    async function loadData() { 
       try {
         const res = await axios.get(`${BaseUrl}/api/cms/services`);
         setPage(res?.data?.data || null);
@@ -75,18 +75,18 @@ const ChooseUsSection = ({ className }) => {
               <div className="tekup-iconbox-wrap4">
                 <div className="tekup-iconbox-icon4">
                   <img
-                    src={"https://ik.imagekit.io/fsobpyaa5i/icons8-entertainment-100%20(3).png"}
+                    src={"https://ik.imagekit.io/fsobpyaa5i/icons8-share-user-96.png"}
                     alt={""}
                   />
                 </div>
                 <div className="tekup-iconbox-data4">
                   <h4>{"Renting"}</h4>
-                  <p>{"Disponibilizamos serviço profissional de renting de displays LED para eventos, empresas, instituições e campanhas publicitárias."}</p>
+                  <p>{"O renting de soluções LED  é ideal para empresas que procuram impacto visual sem um grande investimento inicial."}</p>
                 </div>
               </div>
             </div>
         </div>
-        <br />
+        <br /> 
       </div>
     </div>
   );

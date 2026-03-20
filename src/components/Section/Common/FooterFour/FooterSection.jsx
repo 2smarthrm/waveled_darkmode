@@ -24,7 +24,7 @@ const toArray = (raw) =>
     : [];
 
 async function fetchJson(url) {
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { cache: "no-store" }); 
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
@@ -127,7 +127,7 @@ export default function FooterFore(props) {
                   Hello  
                 </h2>
                 <p className="wl-cta-sub">
-                  Se você tem as perguntas, a Waveled tem as respostas.
+                  Se tem perguntas, a Waveled tem as respostas.
                 </p>
               </div>
 
