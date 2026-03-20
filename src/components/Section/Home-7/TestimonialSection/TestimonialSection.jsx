@@ -15,7 +15,7 @@ function getVisibleCards(containerWidth) {
 
 const TestimonialSection = () => {
   const sliderRef = useRef(null);
-  const blurRef = useRef(null); // blur ref
+  const blurRef = useRef(null);  
   const [loadingData, setLoadingData] = useState([]);
   const [visibleCards, setVisibleCards] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -117,20 +117,12 @@ const TestimonialSection = () => {
     <>
       <div className="section dark-bg blur-slide-screen section-testimonial" style={{ position: "relative" }}>
         <div className="image-wall">
-          <img
-            src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-27T144858.408.jpg"
-            alt="waveled"
-          />
+          <img  src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-27T144819.104%202%20(1)%20(1).png"  alt="waveled" />
         </div>
-        <section className="over-product-blur" ref={blurRef}>
-          <div className="title-container">
-            <div className="container-title">
-               <h3>Soluções de quiosque digital</h3>
-            </div>
-          </div>
+        <section className="over-product-blur" ref={blurRef}> 
           {loadingData.length > 0 && (
             <div
-              className="slider-container slider-container-area" 
+              className="slider-container slider-container-area"  
               ref={sliderRef}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -208,9 +200,9 @@ const TestimonialSection = () => {
         </section>
       </div>
       <style jsx>{`
-        .slider-container {
+         .slider-container {
           display: flex;
-          align-items: center;
+           align-items: center;
           justify-content: flex-end;
           width: 100%;
           padding: 24px 0;
@@ -252,8 +244,9 @@ const TestimonialSection = () => {
         .slider-card .text {
           padding: 14px 14px 16px;
         }
+         
         .slider-card .text h4 {
-          font-size: 18px;
+          font-size: 17px;
           margin: 0 0 6px;
           color: #e5e7eb;
         }

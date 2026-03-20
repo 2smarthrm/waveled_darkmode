@@ -2,12 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-// (Opcional) Plugins — descomenta se quiser
-// import Captions from "yet-another-react-lightbox/plugins/captions";
-// import "yet-another-react-lightbox/plugins/captions.css";
-// import Zoom from "yet-another-react-lightbox/plugins/zoom";
-// import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-// import "yet-another-react-lightbox/plugins/thumbnails.css";
+ 
 
 const CONTENT = {
   tabs: [
@@ -18,28 +13,22 @@ const CONTENT = {
 
   slides: [
     {
-      id: "s1",
-      image:
-        "https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202025-12-19T105212.326.jpg",
-      title: "Lojas de cosmeticos",
-      description:
-        "Ideal para montras e vitrinas inteligentes, destacando produtos sem ocultá-los. Permite conteúdo dinâmico sobre produtos reais, criando um efeito de “realidade aumentada física”.",
+      id:"s1",
+      image:"https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202025-12-19T105212.326.jpg",
+      title:"Lojas de cosmeticos",
+      description:"Ideal para montras e vitrinas inteligentes, destacando produtos sem ocultá-los. Permite conteúdo dinâmico sobre produtos reais, criando um efeito de “realidade aumentada física”.",
     },
     {
-      id: "s2",
-      image:
-        "https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202025-12-19T111038.202.jpg",
-      title: "Shopping e Mercados",
-      description:
-        "Perfeito para áreas de grande fluxo, com campanhas visíveis sem bloquear a visão da montra. Conteúdo dinâmico e moderno para destacar produtos e promoções.",
+      id:"s2",
+      image:"https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202025-12-19T111038.202.jpg",
+      title:"Shopping e Mercados",
+      description:"Perfeito para áreas de grande fluxo, com campanhas visíveis sem bloquear a visão da montra. Conteúdo dinâmico e moderno para destacar produtos e promoções.",
     },
     {
-      id: "s3",
-      image:
-        "https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202025-12-19T114812.256.jpg",
+      id:"s3",
+      image:"https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202025-12-19T114812.256.jpg",
       title: "Lojas de cosmetico",
-      description:
-        "Experiência premium com campanhas rotativas e animações suaves. Ideal para vitrinas inteligentes e comunicação visual moderna.",
+      description:"Experiência premium com campanhas rotativas e animações suaves. Ideal para vitrinas inteligentes e comunicação visual moderna.",
     },
   ],
 
@@ -59,12 +48,12 @@ export default function CarouselShop() {
   const timerRef = useRef(null);
   const hoveringRef = useRef(false);
 
-  // Crossfade background (duas camadas)
+ 
   const [bgA, setBgA] = useState(slides[0]?.image || "");
   const [bgB, setBgB] = useState("");
   const [showA, setShowA] = useState(true);
 
-  // Transição do texto bottom-left
+ 
   const [textKey, setTextKey] = useState(0);
 
   const lightboxSlides = useMemo(() => {
@@ -83,7 +72,7 @@ export default function CarouselShop() {
 
   const next = () => goTo(index + 1);
 
-  // autoplay
+ 
   useEffect(() => {
     if (!total) return;
 
@@ -100,11 +89,9 @@ export default function CarouselShop() {
     };
 
     start();
-    return () => stop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => stop(); 
   }, [index, total, data.autoplayMs]);
-
-  // keyboard
+ 
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowRight") next();
@@ -112,43 +99,31 @@ export default function CarouselShop() {
       if (e.key === "Escape") setIsLightboxOpen(false);
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => window.removeEventListener("keydown", onKey); 
   }, [index, total]);
 
   const active = slides[index];
-
-  // quando muda o slide: troca background com fade + anima texto
+ 
   useEffect(() => {
-    if (!active?.image) return;
-
-    // anima texto (remount)
+    if (!active?.image) return; 
     setTextKey((k) => k + 1);
-
-    // crossfade
+ 
     if (showA) {
       setBgB(active.image);
       requestAnimationFrame(() => setShowA(false));
     } else {
       setBgA(active.image);
       requestAnimationFrame(() => setShowA(true));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    } 
   }, [index]);
 
   return (
-    <>
-      {/* Lightbox (Yet Another React Lightbox) */}
+    <> 
       <Lightbox
         open={isLightboxOpen}
         close={() => setIsLightboxOpen(false)}
         index={index}
-        slides={lightboxSlides}
-        // (Opcional) plugins:
-        // plugins={[Captions, Zoom, Thumbnails]}
-        // captions={{ showToggle: true, descriptionTextAlign: "start" }}
-        // zoom={{ maxZoomPixelRatio: 2.5 }}
-        // thumbnails={{ position: "bottom", width: 110, height: 68, border: 0, padding: 0, gap: 10 }}
+        slides={lightboxSlides} 
         carousel={{ finite: false }}
         on={{
           view: ({ index: i }) => setIndex(i),
@@ -157,12 +132,7 @@ export default function CarouselShop() {
 
       <div className="section tekup-section-padding">
         <div className="section-carousel container">
-          <section
-            className="wl-hero position-relative overflow-hidden"
-            onMouseEnter={() => (hoveringRef.current = true)}
-            onMouseLeave={() => (hoveringRef.current = false)}
-          >
-            {/* Background layers (crossfade suave) */}
+          <section    className="wl-hero position-relative overflow-hidden" onMouseEnter={() => (hoveringRef.current = true)}  onMouseLeave={() => (hoveringRef.current = false)}   > 
             <div className="wl-bg-stack" aria-hidden="true">
               <div
                 className={`wl-bg wl-bg-a ${showA ? "is-on" : "is-off"}`}
@@ -173,14 +143,9 @@ export default function CarouselShop() {
                 style={{ backgroundImage: `url(${bgB})` }}
               />
             </div>
-
-            {/* Overlays */}
-            <div className="wl-overlay" aria-hidden="true" />
-
-            {/* Bottom shadow gradient (YouTube-like) */}
-            <div className="wl-bottom-shadow" aria-hidden="true" />
-
-            {/* Top pills */}
+ 
+            <div className="wl-overlay" aria-hidden="true" /> 
+            <div className="wl-bottom-shadow" aria-hidden="true" /> 
             <div className="wl-top container-fluid px-4 px-lg-5 pt-4">
               <div className="d-flex gap-3 flex-wrap align-items-center">
                 {data.tabs.map((t, i) => {
@@ -194,7 +159,7 @@ export default function CarouselShop() {
                       }`}
                       onClick={() => {
                         setActiveTab(t.id);
-                        goTo(i); // tabs controlam o slide por índice
+                        goTo(i); 
                       }}
                     >
                       {t.label}
@@ -203,16 +168,12 @@ export default function CarouselShop() {
                 })}
               </div>
             </div>
-
-            {/* Stage */}
-            <div className="wl-stage container-fluid px-4 px-lg-5">
-              {/* Bottom left text (muda com slide) */}
+ 
+            <div className="wl-stage container-fluid px-4 px-lg-5"> 
               <div className="wl-copy" key={textKey}>
                 <h2 className="wl-title mb-3">{active?.title || ""}</h2>
                 <p className="wl-desc mb-0">{active?.description || ""}</p>
-              </div>
-
-              {/* Bottom right indicator pill */}
+              </div> 
               <div className="wl-indicator">
                 <div className="wl-indicator-pill">
                   <div className="wl-indicator-dot wl-indicator-dot--big" />
@@ -230,8 +191,6 @@ export default function CarouselShop() {
                   ))}
                 </div>
               </div>
-
-              {/* Clique no background abre lightbox */}
               <button
                 type="button"
                 className="wl-bg-click"

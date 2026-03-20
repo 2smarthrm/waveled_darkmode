@@ -62,30 +62,30 @@ const ItSolutionSection = () => {
               <img
                 className="sport-img"
                 src="https://res.cloudinary.com/dcl5uszfj/image/upload/v1769182102/waveled/uploads/glcylamgtwrx7rmmpscm.jpg"
-                alt="Painel LED instalado em contexto desportivo"
+                alt="Painel LED  "
               />
             </div>
           </div>  
         </div>
           <br /><br /> 
-      </div> 
+      </div>  
            <div >
-               <img className="image-home" src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20-%202026-02-27T144951.695.png" alt="" />
+               <img className="image-home" src="https://ik.imagekit.io/fsobpyaa5i/kiosso_123.png" alt="" />
            </div>
           <div className="container"> 
           <br /><br />
           <div className="row row-reverse"> 
-          <div className="col-lg-6 order-lg-2">
+          <div className="col-lg-6 order-lg-2"> 
             <div className="tekup-thumb ml-60">
               <img
                 className="sport-img"
-                src="https://ik.imagekit.io/fsobpyaa5i/image-gen%20(66).png"
-                alt="Painel LED instalado em contexto desportivo"
+                src="https://ik.imagekit.io/fsobpyaa5i/Group%2025%20(1).png"
+                alt="Painel LED "
               />
             </div>
-          </div>  
+          </div>   
           <div className="col-lg-6 d-flex align-items-center">
-            <div className="tekup-default-content mr-60">
+            <div className="tekup-default-content mr-60"> 
               <h2>Soluções em Paineis LED <br/> para várias Aplicações</h2>
               <p>
                 Contamos com um portfolio de soluções especializadas e
@@ -93,8 +93,7 @@ const ItSolutionSection = () => {
                 áreas de Retalho, Corporate, Rental, Hotelaria, Cultura, Educação,
                 Saúde, Desporto, Transportes e Broadcast, com o objectivo de
                 promover a visibilidade e o impacto da sua comunicação. 
-              </p>
-
+              </p> 
               <div className="tekup-extra-mt">
                 <Link
                   className="tekup-default-btn"
@@ -197,3 +196,6 @@ const ItSolutionSection = () => {
 };
 
 export default ItSolutionSection;
+
+
+ 

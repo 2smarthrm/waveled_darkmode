@@ -1,5 +1,4 @@
-"use client";
-
+"use client"; 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
@@ -45,8 +44,7 @@ export default function ServiceSection() {
     loadServicesPage(); 
   }, [BaseUrl]);
 
-  const hero = page?.hero || { title: "", description: "" };
-  const boxes = Array.isArray(page?.boxes) ? page.boxes : [];
+  const hero = page?.hero || { title: "", description: "" }; 
   const blocks = Array.isArray(page?.content_blocks) ? page.content_blocks : [];
   const sectionsOrder = Array.isArray(page?.sections_order)
     ? page.sections_order
@@ -88,7 +86,6 @@ export default function ServiceSection() {
 
   const renderHero = () => {
     if (!hero?.title && !hero?.description) return null;
-
     return (
       <div className="section bg-light1 tekup-section-padding2">
         <div className="container">
@@ -121,8 +118,7 @@ export default function ServiceSection() {
                 <Link href="/contact-us" className="tekup-default-btn">
                   Saiba mais
                 </Link>
-              </div>
-
+              </div> 
               <div style={{ padding: "20px" }} className="image serv-img">
                 {image ? (
                   <img
@@ -155,7 +151,7 @@ export default function ServiceSection() {
       <section className="video-area" key={item?._id || `overlay-${index}`}>
         {bgImage ? <img src={bgImage} alt={text1 || "Overlay"} loading="lazy" /> : null}
 
-        <div className="over-video-large">
+        <div className="over-video-large d-none">
           <div className="tekup-section-padding">
             <div className="container">
               {text1 ? <h2>{text1}</h2> : null}
@@ -171,10 +167,7 @@ export default function ServiceSection() {
     );
   };
 
-  const renderContent = () => {
-    // Ordem final: 1760 - 40 - 130 - 140 - 300 - 1100 
-    // para manter o comportamento “secção + overlay” repetido,
-    // fazemos: renderiza services (cada um) e, por baixo, se existir um overlay com o mesmo index, renderiza também.
+  const renderContent = () => { 
     if (!serviceBlocks.length && !overlayBlocks.length) return null;
 
     const max = Math.max(serviceBlocks.length, overlayBlocks.length);

@@ -76,12 +76,14 @@ const AccordionSection = () => {
                     </Accordion.Header>
 
                     <Accordion.Body>
-                       <IoMdCheckmarkCircleOutline /> <span className="ml-1">Menor investimento inicial</span> <br/>
+                       <div className="pd-l10">
+                        <IoMdCheckmarkCircleOutline /> <span className="ml-1">Menor investimento inicial</span> <br/>
                        <IoMdCheckmarkCircleOutline /> <span className="ml-1">Maior flexibilidade </span> <br/>
                        <IoMdCheckmarkCircleOutline /> <span className="ml-1">Custo  previsivel</span> <br/> 
                        <IoMdCheckmarkCircleOutline /> <span className="ml-1">Acesso a tecnologia atualizada</span> <br/> 
                        <IoMdCheckmarkCircleOutline /> <span className="ml-1">Soluções ajustadas á necessidade actual</span> <br/> 
                        <IoMdCheckmarkCircleOutline /> <span className="ml-1">Manutenção incluída </span><br/> 
+                       </div>
                       <br />
                       <hr />
                       <br />

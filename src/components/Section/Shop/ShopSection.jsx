@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IoPlay } from "react-icons/io5"; 
 
+ 
 function FiveSolutionsSlider({ items }) {
   const Settings = {
     dots: false,
@@ -20,9 +21,18 @@ function FiveSolutionsSlider({ items }) {
     slidesToScroll: 2,
     initialSlide: 0,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true, dots: true } },
-      { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 1 }},
-      { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+      {
+        breakpoint: 1024, 
+        settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true, dots: true } 
+      },
+      { 
+        breakpoint: 600, 
+        settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 1 }
+      },
+      { 
+        breakpoint: 480, 
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
+      },
     ],
   };
 
@@ -361,7 +371,7 @@ export default function ShopSection() {
     );
   }
 
-  // map content and ensure a product id + _productLink for every item
+ 
   const topVerticalSolutions =
     page.top_solutions?.map((x) => {
       const pid = x.solution?.wl_product?._id || x.solution?.wl_product;
@@ -493,24 +503,5 @@ export default function ShopSection() {
       )}
     </div>
   );
-}
+} 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
